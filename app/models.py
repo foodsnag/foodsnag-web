@@ -35,12 +35,13 @@ class User(UserMixin, db.Model):
     return check_password_hash(self.password_hash, password)
 
   def to_json(self):
-    return jsonify({
+    json_post = {
       'id' : self.id,
       'email' : self.email,
       'member_since' : self.member_since,
       'location_id' : self.location_id
-    })
+    }
+    return json_post
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -61,7 +62,7 @@ class Event(db.Model):
   attendees = db.relationship('User', backref='eventsAttended', lazy='select')
 
   def to_json(self):
-    return jsonify( {
+    json_post = {
       'id' : self.id,
       'author_id' : self.author_id,
       'location_id' : self.location_id,
@@ -71,7 +72,8 @@ class Event(db.Model):
       'time' : self.time,
       'timestamp' : self.timestamp,
       'body' : self.body
-    })
+    }
+    return json_post
       
 
 class Location(db.Model):
@@ -84,8 +86,8 @@ class Location(db.Model):
   events = db.relationship('Event', backref='location', lazy='dynamic')
 
   def to_json(self):
-    return jsonifiy({
+    json_post = {
       'id' : self.id,
-      'name' : self.name,
-      'events' : self.events
-    })
+      'name' : self.name
+    }
+    return json_post
