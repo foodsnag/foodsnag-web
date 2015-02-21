@@ -2,7 +2,6 @@
 *.sql
 *.swp
 
-data*
 env
 venv
 __pycache__
