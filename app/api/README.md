@@ -2,13 +2,13 @@
 
 ## Get location info
 
-API call:
+### API call:
 
     api/location/<location id>
 
   `location id` - The id of the location
 
-Example return:
+### Example return:
 
     >>> api/location/888
     {
@@ -19,7 +19,7 @@ Example return:
     
 ## Get events by location
 
-Api call:
+### Api call:
 
     api/location/<location id>/events/<lim>
 
@@ -27,7 +27,7 @@ Api call:
 
   `lim` - max number of events to return, max 25
 
-Example return:
+### Example return:
 
     >>> api/location/888/events/2
     {
@@ -59,7 +59,7 @@ Example return:
 
 ## Get users by location
 
-API call:
+### API call:
 
     api/location/<location id>/users/<lim>
 
@@ -67,7 +67,7 @@ API call:
 
   `lim` - Max number of events to return, max 25
 
-Example return:
+### Example return:
 
     >>> api/location/888/users/3
     {
@@ -97,14 +97,14 @@ Example return:
 
 ## Get user profile
 
-API call:
+### API call:
 
     api/user/<user id>
 
 
   `user id` - The user's id
 
-Example return:
+### Example return:
 
     >>> api/user/1  
     {
@@ -118,7 +118,7 @@ Example return:
 
 ## Get user's created events
 
-API call:
+### API call:
 
     api/user/<user id>/events/<lim>
 
@@ -126,32 +126,34 @@ API call:
 
   `lim` - Max number of events to return, max 25
 
-{
-  "events": [
+### Example return:
+
     {
-      "author_id": 1,
-      "body": "ou",
-      "id": 1,
-      "location_id": 888,
-      "name": "New event 1",
-      "place": "auaoenu",
-      "serving": "Pizza!",
-      "time": "Wed, 21 Feb 1900 15:37:00 GMT",
-      "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
-    },
-    {
-      "author_id": 1,
-      "body": "'''",
-      "id": 2,
-      "location_id": 888,
-      "name": "aoeue",
-      "place": "uuuu",
-      "serving": "Pizza!",
-      "time": "Wed, 21 Feb 1900 15:37:00 GMT",
-      "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
+      "events": [
+        {
+          "author_id": 1,
+          "body": "ou",
+          "id": 1,
+          "location_id": 888,
+          "name": "New event 1",
+          "place": "auaoenu",
+          "serving": "Pizza!",
+          "time": "Wed, 21 Feb 1900 15:37:00 GMT",
+          "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
+        },
+        {
+          "author_id": 1,
+          "body": "'''",
+          "id": 2,
+          "location_id": 888,
+          "name": "aoeue",
+          "place": "uuuu",
+          "serving": "Pizza!",
+          "time": "Wed, 21 Feb 1900 15:37:00 GMT",
+          "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
+        }
+      ]
     }
-  ]
-}
 
 ## Get user's attended events
 
@@ -163,7 +165,7 @@ API call:
 
   `lim` - Max number of events to return, max 25
 
-Example return:
+### Example return:
 
     {
       "events": [
@@ -196,13 +198,13 @@ Example return:
 
 ## Get event info
 
-API call:
+### API call:
 
     api/event/<event id>
 
   `event id` - The id of the event
 
-Example return:
+### Example return:
 
     {
       "author_id": 1,
@@ -219,7 +221,7 @@ Example return:
 
 ## Get attendees at event
 
-API call:
+### API call:
 
     api/event/<event id>/attending
 
