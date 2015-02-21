@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os
+import os, csv
 COV = None
 if os.environ.get('FLASK_COVERAGE'):
     import coverage
@@ -14,6 +14,7 @@ if os.path.exists('.env'):
             os.environ[var[0]] = var[1]
 
 from app import create_app, db
+from app.models import User, Location
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -71,6 +72,23 @@ def deploy():
 
     # create user roles
     Role.insert_roles()
+
+@manager.command
+def importschools(fpath):
+    """Import CSV file with all schools into database"""
+    n = 0
+    with open(fpath) as f:
+        reader = csv.reader(f)
+        for row in reader:
+            name = row[1].replace('&amp','&')
+            if(not Location.query.filter_by(name=name).first()):
+                school = Location(name=name, url=row[2])
+                db.session.add(school)
+                n += 1
+
+    print('%d new locations added to database' % n)
+    db.session.commit()
+
 
 if __name__ == '__main__':
     manager.run()

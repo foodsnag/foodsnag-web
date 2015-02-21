@@ -50,7 +50,7 @@ class Event(db.Model):
   # Store the ids of the location of the event and the user who submitted id
   location_id = db.Column(db.Integer, db.ForeignKey('locations.id'))
   author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-  attendees = db.relationship('User', backref='eventsAttended', lazy='dynamic')
+  attendees = db.relationship('User', backref='eventsAttended', lazy='select')
 
 class Location(db.Model):
   __tablename__ = 'locations'
