@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Pizza Time{% endblock %}
+{% block title %}freets.me{% endblock %}
 
 {% block page_content %}
 
@@ -18,13 +18,12 @@
 
   <!-- Register/Sign in -->
   <div class="jumbotron">
-    logo.png
-    <h1>freets me</h1>
+    <h1>freets.me</h1>
 
     <div class="text-block">
       <div class="btn-group btn-group-lg" role="group">
-      <button type="button" class="btn btn-primary">Login</button>
-      <button type="button" class="btn btn-success">Sign Up</button>
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary" role="button">Login</a>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-success" role="button">Sign Up</a>
       </div>
     </div>
 
@@ -40,7 +39,7 @@
           <h4 class="modal-title" id="login-modal">Login</h4>
         </div>
         <div class="modal-body">
-          
+
         </div>
       </div>
     </div>
@@ -64,5 +63,3 @@
 {% endif %}
 
 {% endblock %}
-
-
