@@ -191,3 +191,38 @@ Example return:
         }
       ]
     }
+
+# Events
+
+## Get event info
+
+API call:
+
+    api/event/<event id>
+
+  `event id` - The id of the event
+
+Example return:
+
+    {
+      "author_id": 1,
+      "body": "ou",
+      "id": 1,
+      "location_id": 888,
+      "name": "New event 1",
+      "num_attendees": 1,
+      "place": "auaoenu",
+      "serving": "Pizza!",
+      "time": "Wed, 21 Feb 1900 15:37:00 GMT",
+      "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
+    }
+
+## Get attendees at event
+
+API call:
+
+    api/event/<event id>/attending
+
+  `event id` - The id of the event
+
+Not implemented yet :(
