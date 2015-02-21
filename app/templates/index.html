@@ -17,20 +17,17 @@
 {% else %}
 
   <!-- Register/Sign in -->
-  <div class="row">
-    <div class="column">
-      <div class="ui message main">
+  <div class="jumbotron">
+    logo.png
+    <h1>freets me</h1>
 
-        <h1 class="ui center aligned header">Start finding free food on campus!</h1>
-
-        <div class="massive ui buttons">
-          <div class="blue ui button">Register now!</div>
-          <div class="or"></div>
-          <div class="ui positive button">Log In!</div>
-        </div>
-
+    <div class="text-block">
+      <div class="btn-group btn-group-lg" role="group">
+      <button type="button" class="btn btn-primary">Login</button>
+      <button type="button" class="btn btn-success">Sign Up</button>
       </div>
     </div>
+
   </div>
 
 
@@ -43,7 +40,7 @@
           <h4 class="modal-title" id="login-modal">Login</h4>
         </div>
         <div class="modal-body">
-          {{ wtf.quick_form(loginForm) }}
+          
         </div>
       </div>
     </div>
