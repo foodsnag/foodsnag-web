@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Pizza Time{% endblock %}
+
+{% block page_content %}
+
+{% if current_user.is_authenticated() %}
+  <div class="page-header">
+      <h1>Free food at {{ current_user.location.name }}</h1>
+      <a class="btn btn-primary" href="{{ url_for('.make_event') }}">Make an Event!</a>
+  </div>
+{% endif %}
+
+{% if current_user.is_authenticated() %}
+  {% include 'eventlist.html' %}
+{% else %}
+
+  <!-- Register/Sign in -->
+  <div class="row">
+    <div class="column">
+      <div class="ui message main">
+
+        <h1 class="ui center aligned header">Start finding free food on campus!</h1>
+
+        <div class="massive ui buttons">
+          <div class="blue ui button">Register now!</div>
+          <div class="or"></div>
+          <div class="ui positive button">Log In!</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="login-modal">Login</h4>
+        </div>
+        <div class="modal-body">
+          {{ wtf.quick_form(loginForm) }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="register-modal">Register</h4>
+        </div>
+        <div class="modal-body">
+          {{ wtf.quick_form(registerForm) }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endif %}
+
+{% endblock %}
+
+

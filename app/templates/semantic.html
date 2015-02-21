@@ -1,0 +1,30 @@
+{% block head %} 
+
+  <link class="ui" href="{{ url_for('static', filename='css/semantic.css') }}" rel="stylesheet"></link>
+  <script src="{{ url_for('static', filename='js/semantic.js') }}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+<body>
+
+
+  {% block navbar %}
+  {% endblock %}
+
+  <main class="ui page grid">
+
+  {% block content %}
+  {% endblock %}
+
+  {% block footer %}
+  {% endblock %}
+
+  </main>
+
+</body>
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

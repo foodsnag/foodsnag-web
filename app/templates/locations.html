@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Pizza Time - Locations{% endblock %}
+
+{% block page_content %}
+<div class="locations panel panel-default">
+  <ul class="list-group">
+    {% for location in locations %}
+      <li class="list-group-item">{{ location.name }} - {{ location.url }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

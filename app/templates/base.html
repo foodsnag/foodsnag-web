@@ -1,0 +1,82 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Freets{% endblock %}
+
+{% block head %}
+{{ super() }}
+  <link class="ui" href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"></link>
+{% endblock %}
+
+{% block navbar %}
+
+<nav class="navbar">
+
+  <a class="title item" href="{{ url_for('main.index') }}">
+    <i class="home icon"></i>Main 
+  </a>
+
+  <div class="right menu">
+    {% if current_user.is_authenticated() %}
+      <div class="ui dropdown item">
+        <a class="item" href="{{ url_for('main.user', username=current_user.username) }}">
+          {{ current_user.username }}<i class="icon dropdown"></i>
+        </a>
+        <div class="menu">
+          <a class="item" href="{{ url_for('main.edit_profile') }}">
+            <i class="settings icon"></i> Edit Profile
+          </a>
+          <a class="item" href="{{ url_for('auth.logout') }}">
+            <i class="sign out icon"></i> Account Settings
+          </a>
+        </div>
+      </div><!-- dropdown -->
+    {% else %}
+      <a class="item" href="{{ url_for('auth.login') }}">
+        <i class="sign in icon"></i> Login
+      </a>
+
+      <a class="item" href="{{ url_for('auth.register') }}">
+        <i class="add user icon"></i> Register
+      </a>
+    {% endif %}
+
+  </div>
+</nav> <!-- menu -->
+
+{% endblock %}
+
+{% block content %}
+
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      {{ message }}
+  </div>
+  {% endfor %}
+
+  {% block page_content %}{% endblock %}
+
+{% endblock %}
+
+{% block footer %}
+
+<div class="footer">
+  Footer!
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/jquery-autocomplete.js') }}"></script>
+
+<script type="text/javascript" src="{{ url_for('static', filename='js/load.js') }}"></script>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Pizza Time - Locations{% endblock %}
+
+{% block page_content %}
+<ul class="list-group">
+  {% for location in locations %}
+    {{ location.url }}
+    hi
+  {% endfor %}
+</ul>
+{% endblock %}

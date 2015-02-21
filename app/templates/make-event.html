@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Pizza Time - Making an Event{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+  <h1>Make an Event</h1>
+</div>
+
+{% if current_user.is_authenticated() %}
+  <h3>Make a new event</h3>
+  {{ wtf.quick_form(form) }}
+{% else %}
+  <a href="{{ url_for('auth.register') }}">Register now!!!</a>
+{% endif %}
+
+{% endblock %}
+

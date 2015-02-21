@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}PizzaTime - {{ event.name }}{% endblock %}
+{% block page_content %}
+
+<div class="page-header">
+<div class="profile-header">
+  <h1>
+  {{ event.name }}
+  </h1>
+  <p>Happening at {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}</p>
+  <p>Submitted by {{ event.author.username }}</p>
+</div>
+</div>
+
+{{ event.body }}
+
+{% endblock %}
