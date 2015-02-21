@@ -1,7 +1,7 @@
 from datetime import datetime
 import hashlib
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import current_app, request, url_for
+from flask import current_app, request, url_for, jsonify
 from flask.ext.login import UserMixin
 from . import db, login_manager
 
@@ -34,6 +34,14 @@ class User(UserMixin, db.Model):
   def verify_password(self, password):
     return check_password_hash(self.password_hash, password)
 
+  def to_json(self):
+    return jsonify({
+      'id' : self.id,
+      'email' : self.email,
+      'member_since' : self.member_since,
+      'location_id' : self.location_id
+    })
+
 @login_manager.user_loader
 def load_user(user_id):
   return User.query.get(int(user_id))
@@ -52,6 +60,20 @@ class Event(db.Model):
   author_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   attendees = db.relationship('User', backref='eventsAttended', lazy='select')
 
+  def to_json(self):
+    return jsonify( {
+      'id' : self.id,
+      'author_id' : self.author_id,
+      'location_id' : self.location_id,
+      'name' : self.name,
+      'place' : self.place,
+      'serving' : self.serving,
+      'time' : self.time,
+      'timestamp' : self.timestamp,
+      'body' : self.body
+    })
+      
+
 class Location(db.Model):
   __tablename__ = 'locations'
   id = db.Column(db.Integer, primary_key=True)
@@ -60,3 +82,10 @@ class Location(db.Model):
   # Store the users and events that belong to this location
   users = db.relationship('User', backref='location', lazy='dynamic')
   events = db.relationship('Event', backref='location', lazy='dynamic')
+
+  def to_json(self):
+    return jsonifiy({
+      'id' : self.id,
+      'name' : self.name,
+      'events' : self.events
+    })
