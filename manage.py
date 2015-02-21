@@ -14,7 +14,7 @@ if os.path.exists('.env'):
             os.environ[var[0]] = var[1]
 
 from app import create_app, db
-from app.models import User, Location
+from app.models import User, Location, Role
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -88,7 +88,6 @@ def importschools(fpath):
 
     print('%d new locations added to database' % n)
     db.session.commit()
-
 
 if __name__ == '__main__':
     manager.run()
