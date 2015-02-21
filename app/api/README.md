@@ -2,7 +2,7 @@
 
 ## Get location info
 
-Api call:
+API call:
 
     api/location/<location id>
 
@@ -59,13 +59,13 @@ Example return:
 
 ## Get users by location
 
-Api call:
+API call:
 
     api/location/<location id>/users/<lim>
 
   `location id` - The id of the location
 
-  `lim` - max number of events to return, max 25
+  `lim` - Max number of events to return, max 25
 
 Example return:
 
@@ -89,6 +89,105 @@ Example return:
           "id": 3,
           "location_id": 888,
           "member_since": "Sat, 21 Feb 2015 21:35:26 GMT"
+        }
+      ]
+    }
+
+# Users
+
+## Get user profile
+
+API call:
+
+    api/user/<user id>
+
+
+  `user id` - The user's id
+
+Example return:
+
+    >>> api/user/1  
+    {
+      "email": "a@b.com",
+      "id": 1,
+      "location_id": 888,
+      "member_since": "Sat, 21 Feb 2015 20:15:49 GMT",
+      "num_events_attended": 5,
+      "num_events_created": 5
+    }
+
+## Get user's created events
+
+API call:
+
+    api/user/<user id>/events/<lim>
+
+  `user id` - The id of the user's 
+
+  `lim` - Max number of events to return, max 25
+
+{
+  "events": [
+    {
+      "author_id": 1,
+      "body": "ou",
+      "id": 1,
+      "location_id": 888,
+      "name": "New event 1",
+      "place": "auaoenu",
+      "serving": "Pizza!",
+      "time": "Wed, 21 Feb 1900 15:37:00 GMT",
+      "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
+    },
+    {
+      "author_id": 1,
+      "body": "'''",
+      "id": 2,
+      "location_id": 888,
+      "name": "aoeue",
+      "place": "uuuu",
+      "serving": "Pizza!",
+      "time": "Wed, 21 Feb 1900 15:37:00 GMT",
+      "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
+    }
+  ]
+}
+
+## Get user's attended events
+
+API call:
+
+    api/user/<user id>/events/<lim>
+
+  `user id` - The id of the user's 
+
+  `lim` - Max number of events to return, max 25
+
+Example return:
+
+    {
+      "events": [
+        {
+          "author_id": 1,
+          "body": "ou",
+          "id": 1,
+          "location_id": 888,
+          "name": "New event 1",
+          "place": "auaoenu",
+          "serving": "Pizza!",
+          "time": "Wed, 21 Feb 1900 15:37:00 GMT",
+          "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
+        },
+        {
+          "author_id": 1,
+          "body": "'''",
+          "id": 2,
+          "location_id": 888,
+          "name": "aoeue",
+          "place": "uuuu",
+          "serving": "Pizza!",
+          "time": "Wed, 21 Feb 1900 15:37:00 GMT",
+          "timestamp": "Sat, 21 Feb 2015 20:37:05 GMT"
         }
       ]
     }
