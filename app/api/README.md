@@ -24,6 +24,7 @@ Api call:
     api/location/<location id>/events/<lim>
 
   `location id` - The id of the location
+
   `lim` - max number of events to return, max 25
 
 Example return:
@@ -61,6 +62,10 @@ Example return:
 Api call:
 
     api/location/<location id>/users/<lim>
+
+  `location id` - The id of the location
+
+  `lim` - max number of events to return, max 25
 
 Example return:
 
