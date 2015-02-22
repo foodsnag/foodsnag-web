@@ -6,6 +6,7 @@
 {% block content %}
 
 {% if current_user.is_authenticated() %}
+  <div id="content" class="container">
   <div class="page-header">
       <h1>Free food at {{ current_user.location.name }}</h1>
       <a class="btn btn-primary" href="{{ url_for('.make_event') }}">Make an Event!</a>
@@ -13,7 +14,8 @@
 {% endif %}
 
 {% if current_user.is_authenticated() %}
-  {% include 'eventlist.html' %}
+    {% include 'eventlist.html' %}
+  </div>
 {% else %}
 
   <div class="full">
