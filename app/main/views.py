@@ -3,7 +3,7 @@ from flask import render_template, session, redirect, url_for, current_app,\
   flash, jsonify, request
 from flask.ext.login import login_user, login_required, current_user
 from . import main
-from .forms import EditProfileForm, MakeEventForm
+from .forms import EditProfileForm, MakeEventForm, SchoolSearchForm
 from ..auth.forms import LoginForm, RegistrationForm
 from .. import db
 from ..models import User, Event, Location
@@ -19,6 +19,12 @@ def index():
   else:
     # Registration form
     register = RegistrationForm()
+
+    schoolSearch = SchoolSearchForm()
+
+    if schoolSearch.validate_on_submit():
+        return redirect(url_for('auth.login'))
+
     if register.validate_on_submit():
       user = User()
       user.email = register.email.data
@@ -38,8 +44,9 @@ def index():
         login_user(user, login.remember_me.data)
         return redirect(url_for('main.index'))
       flash('Invalid username or password.')
-    return render_template('index.html', loginForm=login, registerForm=register)
-    
+    return render_template('index.html', loginForm=login, registerForm=register, \
+        schoolSearchForm=schoolSearch)
+
 
 ## User stuff
 
@@ -47,7 +54,7 @@ def index():
 @main.route('/user/<username>')
 def user(username):
   user = User.query.filter_by(username=username).first_or_404()
-  return render_template('user.html', user=user, events=user.events)
+  return render_template('user.html', user=user, events=user.submitted)
 
 ## Edit profile page
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -55,7 +62,7 @@ def user(username):
 def edit_profile():
   form = EditProfileForm()
   if form.validate_on_submit():
-    num = form.phone.data.replace(' ', '') 
+    num = form.phone.data.replace(' ', '')
     if( num != ''):
       current_user.phone = num
     current_user.text_updates = form.text_updates.data
@@ -109,7 +116,7 @@ def locations():
   return render_template('locations.html', locations=locations)
 
 ## Location page
-#@main.route('/location/<id>')
-#def locations(id):
-  #location = Location.query.get_or_404(id)
-  #return render_template('locations.html', location=location)
+@main.route('/location/<id>')
+def location(id):
+  location = Location.query.get_or_404(id)
+  return render_template('locations.html', location=[location])

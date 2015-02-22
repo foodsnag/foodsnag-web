@@ -1,16 +1,21 @@
 {% for event in events %}
-<div class="event panel panel-primary">
-  <div class="panel-heading">
-    <a class="panel-title" href="{{ url_for('.event', id=event.id) }}">
-    {{event.name }}</a>
-    Happening {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}
-  </div>
-  <div class="panel-body">
-    Submitted by
-    <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
-    {% if current_user == event.author %}
-      <span class="label label-danger">Delete</span>
-    {% endif %}
+<div class="col-md-4">
+  <div class="event panel panel-primary">
+    <div class="panel-heading">
+      <a class="panel-title" href="{{ url_for('.event', id=event.id) }}">
+        {{event.serving }}
+      </a>
+    </div>
+    <div class="panel-body">
+      {{event.name }} Happening {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}
+    </div>
+    <div class="panel-footer">
+      Submitted by
+      <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
+      {% if current_user == event.author %}
+         - <span class="label label-danger">Delete</span>
+      {% endif %}
+    </div>
   </div>
 </div>
 {% endfor %}
