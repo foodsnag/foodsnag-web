@@ -45,9 +45,9 @@
 
       {% endif %}
     </div>
-    {% if current_user == event.author %}
+    <!-- {% if current_user == event.author %}
       <span class="label label-default">Modify</span>
-    {% endif %}
+    {% endif %} -->
     <i>Submitted by
     <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
     -
