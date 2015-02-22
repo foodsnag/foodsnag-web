@@ -3,7 +3,7 @@ from flask import render_template, session, redirect, url_for, current_app,\
   flash, jsonify, request
 from flask.ext.login import login_user, login_required, current_user
 from . import main
-from .forms import EditProfileForm, MakeEventForm
+from .forms import EditProfileForm, MakeEventForm, SchoolSearchForm
 from ..auth.forms import LoginForm, RegistrationForm
 from .. import db
 from ..models import User, Event, Location
@@ -19,6 +19,12 @@ def index():
   else:
     # Registration form
     register = RegistrationForm()
+
+    schoolSearch = SchoolSearchForm()
+
+    if schoolSearch.validate_on_submit():
+        return redirect(url_for('auth.login'))
+
     if register.validate_on_submit():
       user = User()
       user.email = register.email.data
@@ -38,8 +44,9 @@ def index():
         login_user(user, login.remember_me.data)
         return redirect(url_for('main.index'))
       flash('Invalid username or password.')
-    return render_template('index.html', loginForm=login, registerForm=register)
-    
+    return render_template('index.html', loginForm=login, registerForm=register, \
+        schoolSearchForm=schoolSearch)
+
 
 ## User stuff
 
@@ -55,7 +62,7 @@ def user(username):
 def edit_profile():
   form = EditProfileForm()
   if form.validate_on_submit():
-    num = form.phone.data.replace(' ', '') 
+    num = form.phone.data.replace(' ', '')
     if( num != ''):
       current_user.phone = num
     current_user.text_updates = form.text_updates.data

@@ -8,7 +8,8 @@
   {{ event.name }}
   </h1>
   <p>Happening at {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}</p>
-  <p>Submitted by {{ event.author.username }}</p>
+  <p>Submitted by <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a></p>
+  <p><b>Food being served:</b> {{ event.serving }}</p>
 </div>
 </div>
 
