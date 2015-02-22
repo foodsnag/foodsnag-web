@@ -125,3 +125,14 @@ def location(id):
   location = Location.query.get_or_404(id)
   events = location.events
   return render_template('location.html', location=location, events=events)
+
+# Attend Event
+@main.route('/attend/<id>')
+def attend(id):
+  event = Event.query.get_or_404(id)
+  if current_user.is_attending(id):
+    flash('You are already attending %s!'% event.name)
+    return redirect(url_for('.event', id=event.id))
+  event.attend_event(current_user.id)
+  flash('You are now attending %s!'% event.name)
+  return redirect(url_for('.event', id=event.id))
