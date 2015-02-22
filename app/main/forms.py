@@ -29,7 +29,11 @@ class EditProfileForm(Form):
 
 class MakeEventForm(Form):
   name = StringField('What is the event?', validators=[Required()])
-  serving = StringField('What is being offered?', default='Pizza!')
+  food_types = [("Fruit","Fruit"), ("Lemonade","Lemonade"), ("Breakfast","Breakfast"), ("Meat","Meat"), ("Sausage","Sausage"), ("Hot dogs","Hot dogs"),
+  ("Burgers","Burgers"), ("Candy","Candy"), ("Ice cream","Ice cream"), ("Drinks","Drinks"), ("Soup","Soup"), ("Alcohol","Alcohol"), ("Pizza","Pizza"),
+  ("Chicken","Chicken"), ("Fish","Fish"), ("Cake","Cake"), ("BBQ","BBQ"), ("Formal dinner","Formal dinner"), ("Smoothie","Smoothie"), ("Coffee","Coffee"),
+  ("Tea","Tea")]
+  serving = SelectField('What is being offered?', choices=food_types)
   place = StringField('Where is this happening (Building/room)?', validators=[Required()])
   now = datetime.datetime.now()#.strftime('%m-%d %H:%M')
   time = DateTimeField('When is this happening?', default=now, format='%m/%d %I:%M%p')
