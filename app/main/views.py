@@ -15,7 +15,7 @@ def index():
   user = None
   events = None
   if current_user.is_authenticated():
-    events = Event.query.filter_by(location=current_user.location).order_by(Event.time.desc())
+    events = Event.future_events(current_user.location_id)
     return render_template('index.html', events=events)
   else:
     # School search form
