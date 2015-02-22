@@ -1,21 +1,15 @@
-.full {
-  background: url(http://placehold.it/1920x1080) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
 body {
   padding-top: 70px;
 }
 
 .jumbotron {
-  background-color: rgba(000,000,000, .1);
+  background-color: rgba(255,255,255, .6);
 }
 
-.wide  {
-  background: url('../images/home-scroll/home01.jpg');
-  width: 100%;
-  padding: 10px;
+.wide {
+  background: url('../images/home-scroll/home01.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
