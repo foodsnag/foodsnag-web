@@ -1,5 +1,27 @@
 # Locations
 
+## Get all locations
+
+### API call:
+
+    api/locations
+
+### Example return:
+
+    {
+      "locations": [
+          {
+            "id": 1,
+            "name": "University of Andorra"
+          },
+        ...
+         {
+            "id": 9128,
+            "name": "Zimbabwe Open University"
+         }
+        ]
+    }
+
 ## Get location info
 
 ### API call:

@@ -4,11 +4,19 @@ from .. import db
 from ..models import Location, Event, User
 from . import api
 
+
+
 @api.route('/location/<int:id>')
 def get_location(id):
   loc = Location.query.get(id)
   print(loc.to_json())
   return jsonify(loc.to_json())
+
+@api.route('/locations')
+def get_locations():
+  locations = Location.query.all()
+  return jsonify({ 'locations' : [ loc.to_json() for loc in locations ] })
+
 
 # Returns lim locations for the location of with id loc_id 
 # Sorts events by those occuring first
