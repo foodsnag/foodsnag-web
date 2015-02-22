@@ -38,6 +38,8 @@ attendees = db.Table('attendees',
   db.Column('event_id', db.Integer, db.ForeignKey('event.id'))
 )
 
+
+
 class User(UserMixin, db.Model):
   __tablename__ = 'user'
   id = db.Column(db.Integer, primary_key=True)
@@ -55,6 +57,13 @@ class User(UserMixin, db.Model):
   def __init__(self, **kwargs):
     # Auto confirm for now
     self.confirmed = True
+
+  def is_attending(self, eventId):
+    e = Event.query.get(eventId)
+    if self in e.attendees:
+      return True
+    else:
+      return False
 
   @property
   def password(self):
@@ -174,6 +183,13 @@ class Event(db.Model):
 
   def __repr__(self):
     return self.name
+
+  def attend_event(self, user_id):
+    u = User.query.get(user_id)
+    self.attendees.append(u)
+
+    db.session.add(self)
+    db.session.commit()
 
   def to_json(self):
     json_post = {
