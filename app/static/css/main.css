@@ -44,6 +44,16 @@ html, body {
   border-color: #802415;
 }
 
+.btn-danger {
+  background-color: #AA4839;
+  border-color: #802415;
+}
+
+.btn-danger:hover {
+  background-color: #802415;
+  border-color: #802415;
+}
+
 .btn-success {
   background-color: #AA5C39;
   border-color: #803615;
@@ -52,6 +62,25 @@ html, body {
 .btn-success:hover {
   background-color: #803615;
   border-color: #803615;
+}
+
+.btn-success.disabled,
+.btn-success[disabled],
+fieldset[disabled] .btn-success,
+.btn-success.disabled:hover,
+.btn-success[disabled]:hover,
+fieldset[disabled] .btn-success:hover,
+.btn-success.disabled:focus,
+.btn-success[disabled]:focus,
+fieldset[disabled] .btn-success:focus,
+.btn-success.disabled:active,
+.btn-success[disabled]:active,
+fieldset[disabled] .btn-success:active,
+.btn-success.disabled.active,
+.btn-success[disabled].active,
+fieldset[disabled] .btn-success.active {
+  background-color: #2A7E43;
+  border-color: #2A7E43;
 }
 
 .panel-primary>.panel-heading {
