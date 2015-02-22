@@ -47,7 +47,7 @@ def index():
 @main.route('/user/<username>')
 def user(username):
   user = User.query.filter_by(username=username).first_or_404()
-  return render_template('user.html', user=user, events=user.events)
+  return render_template('user.html', user=user, events=user.submitted)
 
 ## Edit profile page
 @main.route('/edit-profile', methods=['GET', 'POST'])
@@ -109,7 +109,7 @@ def locations():
   return render_template('locations.html', locations=locations)
 
 ## Location page
-#@main.route('/location/<id>')
-#def locations(id):
-  #location = Location.query.get_or_404(id)
-  #return render_template('locations.html', location=location)
+@main.route('/location/<id>')
+def location(id):
+  location = Location.query.get_or_404(id)
+  return render_template('locations.html', location=[location])

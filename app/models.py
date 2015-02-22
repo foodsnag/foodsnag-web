@@ -50,6 +50,7 @@ class User(UserMixin, db.Model):
   confirmed = db.Column(db.Boolean, default=False)
   member_since = db.Column(db.DateTime(), default=datetime.utcnow())
   location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
+  submitted = db.relationship('Event', backref='author', lazy='dynamic')
   role_id = db.Column(db.Integer, db.ForeignKey('role.id'))
 
   def __init__(self, **kwargs):
