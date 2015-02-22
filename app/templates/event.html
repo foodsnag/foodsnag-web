@@ -21,7 +21,11 @@
 
   <div class="col-md-4">
     <h3>Attendees</h3>
-    <p>There are {{ event.num_attendees() }} people attending.</p>
+    {% if event.num_attendees() > 0 %}
+      <p>There are {{ event.num_attendees() }} attending</p>
+    {% else %}
+      <p>There is currently no one attending.</p>
+    {% endif %}
 
     <ul class="list-unstyled">
       {% if event.attendees %}
@@ -34,9 +38,45 @@
 
   <div class="col-md-4">
     <h3>Count me in, eh?</h3>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
-      Sign Up!
-    </button>
+
+
+    {% if current_user.is_authenticated() and current_user.is_attending(event.id) %}
+
+      <div class="btn-group btn-sm" role="group">
+        <a type="button" class="btn btn-danger" href="{{ url_for('main.unattend', id=event.id) }}">
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        </a>
+        <span class="btn btn-success" disabled>
+          I'm going!
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        </span>
+      </div>
+
+    {% else %}
+      {% if current_user.is_authenticated() %}
+      <div class="btn-group btn-sm" role="group">
+        <a type="button" class="btn btn-primary" href="{{ url_for('main.attend', id=event.id) }}">
+          I want to go!
+          <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </a>
+      </div>
+      {% else %}
+      <p>Login or sign up to attend this event.</p>
+      <div class="btn-group btn-sm" role="group">
+        <!-- Register modal -->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+          Sign Up!
+        </button>
+        <!-- Login modal -->
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
+          Login
+        </button>
+      </div>
+      {% endif %}
+
+    {% endif %}
+
+
   </div>
 </div>
 

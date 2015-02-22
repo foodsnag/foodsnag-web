@@ -10,7 +10,7 @@
       </b>
       - Happening {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}
 
-      {% if current_user.is_attending(event.id) %}
+      {% if current_user.is_authenticated() and current_user.is_attending(event.id) %}
 
         <div class="btn-group btn-sm pull-right" role="group">
           <a type="button" class="btn btn-danger" href="{{ url_for('main.unattend', id=event.id) }}">
@@ -23,20 +23,32 @@
         </div>
 
       {% else %}
-
+        {% if current_user.is_authenticated() %}
         <div class="btn-group btn-sm pull-right" role="group">
           <a type="button" class="btn btn-primary pull-right" href="{{ url_for('main.attend', id=event.id) }}">
             I want to go!
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
           </a>
         </div>
+        {% else %}
+        <div class="btn-group btn-sm pull-right" role="group">
+          <!-- Register modal -->
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+            Sign Up!
+          </button>
+          <!-- Login modal -->
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
+            Login
+          </button>
+        </div>
+        {% endif %}
 
       {% endif %}
     </div>
     {% if current_user == event.author %}
       <span class="label label-default">Modify</span>
     {% endif %}
-     - Submitted by
+    <i>Submitted by
     <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
     -
     {% if event.num_attendees() > 0 %}
@@ -44,6 +56,7 @@
     {% else %}
       No one attending yet
     {% endif %}
+  </i>
   </div>
 </div>
 {% endfor %}
