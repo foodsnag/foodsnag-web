@@ -123,4 +123,5 @@ def locations():
 @main.route('/location/<id>')
 def location(id):
   location = Location.query.get_or_404(id)
-  return render_template('location.html', location=location)
+  events = location.events
+  return render_template('location.html', location=location, events=events)
