@@ -22,7 +22,7 @@
     <div id="full-cont" class="container vertical-center">
 
       <!-- Register/Sign in -->
-      <div class="col-md-6 center-block">
+      <div class="col-md-6">
         <div class="jumbotron text-center">
 
           <img alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
@@ -30,8 +30,17 @@
           <p>We like free food, and we know you do too. Find your school and see the
             listings for free food on your campus. If you like <i>free eats as much as
             me</i>, please register and begin adding events that provide free food.</p>
+        </div>
+      </div>
 
-            {{ wtf.quick_form(schoolSearchForm) }}
+      <div class="col-md-6">
+        <div class="jumbotron text-center">
+          <h2>Search for your school</h2>
+          {{ wtf.quick_form(schoolSearchForm) }}
+
+          <hr>
+
+          <h2>Login/Register</h2>
         </div>
       </div>
     </div>
