@@ -3,17 +3,17 @@
 {% block page_content %}
 
 <div class="page-header">
-<div class="profile-header">
-  <h1>
-  <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.username }}
-  from {{ user.location.name }}
-  {% if user == current_user %}
-    <a class="btn btn-primary" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
-  {% endif %}
-  </h1>
-  <p>Member since {{ user.member_since.strftime('%B %d, %Y') }}</p>
-  </p>
-</div>
+  <div class="profile-header"> 
+    <h1>
+    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.username }}
+    from {{ user.location.name }}
+    {% if user == current_user %}
+      <a class="btn btn-primary pull-right" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
+    {% endif %}
+    </h1>
+    <p>Member since {{ user.member_since.strftime('%B %d, %Y') }}</p>
+    </p>
+  </div>
 </div>
 <h3>Events by {{ user.username }}</h3>
 

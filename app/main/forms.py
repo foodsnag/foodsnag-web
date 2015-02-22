@@ -48,6 +48,7 @@ class MakeEventForm(Form):
 
 class SchoolSearchForm(Form):
   location = AutocompleteField(
+        label='Search for your school',
         url='main.autocomplete',
         placeholder='Your school...',
         get_label='name',
