@@ -5,14 +5,20 @@
 {% block head %}
 {{ super() }}
   <link class="ui" href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"></link>
+  <link class="ui" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}" rel="stylesheet"></link>
+  <link class="ui" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}" rel="stylesheet"></link>
+  <link class="ui" href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet"></link>
+  <link class="ui" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"></link>
 {% endblock %}
 
 {% block navbar %}
 
-<nav class="navbar navbar-default">
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
 
     <div class="navbar-header">
+      <img class="navbar-brand" alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
       <a class="navbar-brand" href="{{ url_for('main.index') }}">freets.me</a>
     </div>
 
@@ -97,7 +103,6 @@
 </div>
 
 {% endblock %}
-
 
 {% block scripts %}
 {{ super() }}
