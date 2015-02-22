@@ -64,13 +64,13 @@
       <p>Login or sign up to attend this event.</p>
       <div class="btn-group btn-sm" role="group">
         <!-- Register modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+        <a class="btn btn-primary" href="{{ url_for('auth.register') }}">
           Sign Up!
-        </button>
+        </a>
         <!-- Login modal -->
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
+        <a class="btn btn-success" href="{{ url_for('auth.login') }}">
           Login
-        </button>
+        </a>
       </div>
       {% endif %}
 
