@@ -28,65 +28,42 @@
           <img alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
           <h1>freets.me</h1>
           <p>We like free food, and we know you do too. Find your school and see the
-            listings for free food on your campus. If you like freets.me,
-            please register and begin adding events that provide free food.</p>
+            listings for free food on your campus. If you like <i>free eats as much as
+            me</i>, please register and begin adding events that provide free food.</p>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="jumbotron text-center">
-          <h3>Search for your school</h3>
-          {{ wtf.quick_form(schoolSearchForm) }}
 
-          <hr>
 
           <p>Sign up or login to find free food on campus!</p>
 
           <div class="btn-group btn-group-lg" role="group">
             <!-- Register modal -->
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#registerModal">
+            <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}">
               Sign Up!
-            </button>
+            </a>
             <!-- Login modal -->
-            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#loginModal">
+            <a class="btn btn-success btn-lg" href="{{ url_for('auth.login') }}">
               Login
-            </button>
+            </a>
+          </div> <!-- / button group -->
+
+          <div class="row">
+          <div class="col-xs-5"><hr></div>
+          <div class="col-xs-2">OR</div>
+          <div class="col-xs-5"><hr></div>
           </div>
+
+          <h3>Search for your school</h3>
+          {{ wtf.quick_form(schoolSearchForm) }}
+
         </div>
       </div>
     </div>
   </div>
 
-
-<!-- Register Modal -->
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModal" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-          {{ wtf.quick_form(registerForm) }}
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Login Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-          {{ wtf.quick_form(loginForm) }}
-      </div>
-    </div>
-  </div>
-</div>
 
 {% endif %}
 

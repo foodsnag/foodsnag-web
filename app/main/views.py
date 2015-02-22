@@ -3,53 +3,27 @@ from flask import render_template, session, redirect, url_for, current_app,\
   flash, jsonify, request
 from flask.ext.login import login_user, login_required, current_user
 from . import main
-from .forms import EditProfileForm, MakeEventForm, SchoolSearchForm
-from ..auth.forms import LoginForm, RegistrationForm
+from .forms import EditProfileForm, SchoolSearchForm
 from .. import db
 from ..models import User, Event, Location
 from autocomplete.views import autocomplete_view
+from sqlalchemy import func
 
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
   user = None
+  events = None
   if current_user.is_authenticated():
     events = Event.query.filter_by(location=current_user.location).order_by(Event.time.desc())
     return render_template('index.html', events=events)
   else:
-    # Registration form
-    register = RegistrationForm()
-
-    if register.validate_on_submit():
-      user = User()
-      user.email = register.email.data
-      user.username = register.username.data
-      user.location = register.location.data
-      user.password = register.password.data
-      user.confirmed = True
-      db.session.add(user)
-      db.session.commit()
-      return redirect(url_for('auth.login'))
-
-
     # School search form
-    schoolSearch = SchoolSearchForm()
-
+    schoolSearch = SchoolSearchForm(prefix="search")
     if schoolSearch.validate_on_submit():
       return redirect(url_for('main.location', id=schoolSearch.location.data.id))
 
-    # Login form
-    login = LoginForm()
-    if login.validate_on_submit():
-      user = User.query.filter_by(email=login.email.data).first()
-      if user is not None and user.verify_password(login.password.data):
-        login_user(user, login.remember_me.data)
-        return redirect(url_for('main.index'))
-      flash('Invalid username or password.')
-
-    return render_template('index.html', loginForm=login,\
-        registerForm=register, \
-        schoolSearchForm=schoolSearch)
+    return render_template('index.html', schoolSearchForm=schoolSearch)
 
 
 ## User stuff
@@ -105,13 +79,14 @@ def make_event():
   form = MakeEventForm()
   if form.validate_on_submit():
     event = Event(name=form.name.data, serving=form.serving.data,\
-                  time=form.time.data, body=form.body.data,\
-                  place=form.place.data,
-                  author=current_user._get_current_object(),
-                  location=current_user.location)
+      time=form.time.data, body=form.body.data,\
+      place=form.place.data,
+      author=current_user._get_current_object(),
+      location=current_user.location)
     db.session.add(event)
     return redirect(url_for('.index'))
   return render_template('make-event.html', form=form)
+
 
 ## Locations list page
 @main.route('/locations')
