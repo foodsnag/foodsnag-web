@@ -36,9 +36,7 @@ def index():
     schoolSearch = SchoolSearchForm()
 
     if schoolSearch.validate_on_submit():
-      print(schoolSearch.location.data)
-      school = Location.query.filter_by(name=schoolSearch.location.data).first()
-      return redirect(url_for('main.location', location=school))
+      return redirect(url_for('main.location', id=schoolSearch.location.data.id))
 
     # Login form
     login = LoginForm()
