@@ -20,23 +20,17 @@
     <div id="full-cont" class="container vertical-center">
 
       <!-- Register/Sign in -->
-      <div class="jumbotron text-center">
+      <div class="col-md-6">
+        <div class="jumbotron text-center">
 
-        <img alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
-        <h1>freets.me</h1>
-        <p>We like free food, and we know you do too. Find your school and see the
-          listings for free food on your campus. If you like <i>free eats as much as
-          me</i>, please register and begin adding events that provide free food.</p>
+          <img alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
+          <h1>freets.me</h1>
+          <p>We like free food, and we know you do too. Find your school and see the
+            listings for free food on your campus. If you like <i>free eats as much as
+            me</i>, please register and begin adding events that provide free food.</p>
 
-          {{ wtf.quick_form(schoolSearchForm) }}
-
-        <!-- <div class="text-block">
-          <div class="btn-group btn-group-lg" role="group">
-            <a href="{{ url_for('auth.login') }}" class="btn btn-primary" role="button">Login</a>
-            <a href="{{ url_for('auth.register') }}" class="btn btn-success" role="button">Sign Up</a>
-          </div>
-        </div> -->
-      
+            {{ wtf.quick_form(schoolSearchForm) }}
+        </div>
       </div>
     </div>
   </div>
