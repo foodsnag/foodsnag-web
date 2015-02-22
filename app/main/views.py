@@ -21,7 +21,8 @@ def index():
     # School search form
     schoolSearch = SchoolSearchForm(prefix="search")
     if schoolSearch.validate_on_submit():
-      return redirect(url_for('main.location', id=schoolSearch.location.data.id))
+      if hasattr(schoolSearch.location.data, 'id'):
+        return redirect(url_for('main.location', id=schoolSearch.location.data.id))
 
     return render_template('index.html', schoolSearchForm=schoolSearch)
 
@@ -79,7 +80,6 @@ def make_event():
       location=current_user.location)
     db.session.add(event)
     # Start the mail timer
-    mailsched.start(form.time.data)
     return redirect(url_for('.index'))
   return render_template('make-event.html', form=form)
 
