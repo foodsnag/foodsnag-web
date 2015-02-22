@@ -9,3 +9,9 @@
 body {
   padding-top: 70px;
 }
+
+.wide  {
+  background: url('../images/home-scroll/home01.jpg');
+  width: 100%;
+  padding: 10px;
+}
