@@ -85,7 +85,6 @@ def make_event():
       location=current_user.location)
     db.session.add(event)
     # Start the mail timer
-    mailsched.start(form.time.data)
     return redirect(url_for('.index'))
   return render_template('make-event.html', form=form)
 
