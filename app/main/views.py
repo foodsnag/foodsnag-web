@@ -3,7 +3,7 @@ from flask import render_template, session, redirect, url_for, current_app,\
   flash, jsonify, request
 from flask.ext.login import login_user, login_required, current_user
 from . import main
-from .forms import EditProfileForm, SchoolSearchForm
+from .forms import EditProfileForm, SchoolSearchForm, MakeEventForm
 from .. import db
 from ..models import User, Event, Location
 from autocomplete.views import autocomplete_view
