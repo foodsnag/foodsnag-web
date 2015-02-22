@@ -9,8 +9,8 @@ from ..models import User, Event, Location
 from autocomplete.forms import AutocompleteField
 
 def get_loc_by_id(id):
-    loc = Location.query.filter_by(id=id).first()
-    return loc
+  loc = Location.query.filter_by(id=id).first()
+  return loc
 
 class EditProfileForm(Form):
   text_updates = BooleanField('Send notifications through text')
@@ -43,10 +43,9 @@ class MakeEventForm(Form):
 
 class SchoolSearchForm(Form):
     location = AutocompleteField(
-          url='auth.autocomplete',
-          placeholder='Begin typing to search for your school...',
+          url='main.autocomplete',
+          placeholder='Your school...',
           get_label='name',
           getter=get_loc_by_id,
           validators=[Required()]
       )
-    submit = SubmitField('Submit')

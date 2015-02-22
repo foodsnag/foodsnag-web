@@ -9,7 +9,7 @@
 
 {% block navbar %}
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-inverse">
   <div class="container">
 
     <div class="navbar-header">
@@ -22,12 +22,15 @@
       {% if current_user.is_authenticated() %}
 
       <li class="dropdown">
-        <!-- <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-          {{ current_user.username }}
+
+        <!-- Dropdown toggle -->
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
           <span class="caret"></span>
-        </button> -->
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ current_user.username }}<span class="caret"></span></a>
+          {{ current_user.username }}
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+        </a>
+
+        <!-- Dropdown -->
         <ul class="dropdown-menu" role="menu">
           <li>
             <a href={{ url_for('main.user', username=current_user.username) }}>
@@ -35,6 +38,17 @@
               View Profile
             </a>
           </li>
+
+          <!-- if admin -->
+          {% if current_user.role_id == 1 %}
+            <li>
+              <a href="{{ url_for('admin.index') }}">
+                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+                Admin panel
+              </a>
+            </li>
+          {% endif %}
+
           <li>
             <a href="{{ url_for('main.edit_profile') }}">
               <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
