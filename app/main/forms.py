@@ -51,7 +51,6 @@ class SchoolSearchForm(Form):
         url='main.autocomplete',
         placeholder='Your school...',
         get_label='name',
-        getter=get_loc_by_id,
-        validators=[Required()]
+        getter=get_loc_by_id
     )
   submit = SubmitField('Submit')
