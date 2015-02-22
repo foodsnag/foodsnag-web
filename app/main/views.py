@@ -20,11 +20,6 @@ def index():
     # Registration form
     register = RegistrationForm()
 
-    schoolSearch = SchoolSearchForm()
-
-    if schoolSearch.validate_on_submit():
-        return redirect(url_for('auth.login'))
-
     if register.validate_on_submit():
       user = User()
       user.email = register.email.data
@@ -36,6 +31,15 @@ def index():
       db.session.commit()
       return redirect(url_for('auth.login'))
 
+
+    # School search form
+    schoolSearch = SchoolSearchForm()
+
+    if schoolSearch.validate_on_submit():
+      print(schoolSearch.location.data)
+      school = Location.query.filter_by(name=schoolSearch.location.data).first()
+      return redirect(url_for('main.location', location=school))
+
     # Login form
     login = LoginForm()
     if login.validate_on_submit():
@@ -44,7 +48,9 @@ def index():
         login_user(user, login.remember_me.data)
         return redirect(url_for('main.index'))
       flash('Invalid username or password.')
-    return render_template('index.html', loginForm=login, registerForm=register, \
+
+    return render_template('index.html', loginForm=login,\
+        registerForm=register, \
         schoolSearchForm=schoolSearch)
 
 
@@ -119,4 +125,4 @@ def locations():
 @main.route('/location/<id>')
 def location(id):
   location = Location.query.get_or_404(id)
-  return render_template('locations.html', location=[location])
+  return render_template('location.html', location=location)
