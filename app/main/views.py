@@ -123,7 +123,7 @@ def locations():
 @main.route('/location/<id>')
 def location(id):
   location = Location.query.get_or_404(id)
-  events = location.events
+  events = Events.future_events(location.location_id)
   return render_template('location.html', location=location, events=events)
 
 # Attend Event

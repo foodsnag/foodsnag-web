@@ -46,7 +46,7 @@ class User(UserMixin, db.Model):
   email = db.Column(db.String(64), unique=True, index=True)
   username = db.Column(db.String(64), unique=True, index=True)
   phone = db.Column(db.Integer, unique=True)
-  text_updates = db.Column(db.Boolean)
+  email_notifications = db.Column(db.Boolean)
   password_hash = db.Column(db.String(128))
   confirmed = db.Column(db.Boolean, default=False)
   member_since = db.Column(db.DateTime(), default=datetime.utcnow())
@@ -170,16 +170,19 @@ class Event(db.Model):
       e.name=forgery_py.lorem_ipsum.word()
       e.serving=forgery_py.lorem_ipsum.word()
       e.place=forgery_py.lorem_ipsum.word()
-      e.time=forgery_py.date.date(True)
+      e.time=forgery_py.date.date(past=True)
       e.body=forgery_py.lorem_ipsum.sentence()
       e.author_id=User.query.get(random.randrange(1, User.query.count())).id
       e.location_id=Location.query.get(random.randrange(1, Location.query.count())).id
 
       db.session.add(e)
-      try:
-        db.session.commit()
-      except IntegrityError:
-        db.session.rollback()
+
+      if not i % 100:
+        print(i)
+    try:
+      db.session.commit()
+    except IntegrityError:
+      db.session.rollback()
 
   def __repr__(self):
     return self.name
@@ -194,6 +197,10 @@ class Event(db.Model):
   def unattend_event(self, user_id):
     self.attendees.remove(User.query.get(user_id))
     db.session.commit()
+
+  def future_events(self, location_id):
+    current_time = datetime.utcnow()
+    return self.query.filter(self.time<current_time).filter_by(location_id=location_id).all()
 
   def to_json(self):
     json_post = {
