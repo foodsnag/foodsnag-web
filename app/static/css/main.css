@@ -2,6 +2,10 @@ body, html {
   height: 100%;
 }
 
+body {
+  padding-top: 70px;
+}
+
 .jumbotron {
   background-color: rgba(255,255,255, .8);
 }
@@ -22,7 +26,6 @@ body, html {
 #float-box {
   padding-top: 90px;
 }
-
 
 .footer {
   padding: 10px;
