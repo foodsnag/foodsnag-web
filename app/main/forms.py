@@ -40,3 +40,13 @@ class MakeEventForm(Form):
     pass
     #if field.data < datetime.datetime.now():
     #  raise ValidationError('Time must be in the future')
+
+class SchoolSearchForm(Form):
+    location = AutocompleteField(
+          url='auth.autocomplete',
+          placeholder='Begin typing to search for your school...',
+          get_label='name',
+          getter=get_loc_by_id,
+          validators=[Required()]
+      )
+    submit = SubmitField('Submit')
