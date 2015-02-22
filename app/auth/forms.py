@@ -6,7 +6,7 @@ from ..models import User, Location
 from autocomplete.forms import AutocompleteField
 
 class LoginForm(Form):
-  email = StringField('Email', validators=[Required(), Length(1, 64), Email()])
+  email = StringField('Email or Username', validators=[Required(), Length(1, 64)])
   password = PasswordField('Password', validators=[Required()])
   remember_me = BooleanField('Remember me')
   submit = SubmitField('Log In')
@@ -41,4 +41,3 @@ class RegistrationForm(Form):
     pass
     if User.query.filter_by(username=field.data).first():
       raise ValidationError('Username already in use.')
-
