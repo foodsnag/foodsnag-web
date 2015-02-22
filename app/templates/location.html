@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}freets - {{ location.name }}{% endblock %}
+
+{% block page_content %}
+<div class="locations panel panel-default">
+  <ul class="list-group">
+
+    <!-- List events at this location -->
+    {% include 'eventlist.html' %}
+
+  </ul>
+</div>
+{% endblock %}
