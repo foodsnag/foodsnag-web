@@ -194,6 +194,10 @@ class Event(db.Model):
   def unattend_event(self, user_id):
     self.attendees.remove(User.query.get(user_id))
     db.session.commit()
+  
+  def num_attendees(self):
+    num = len(self.attendees)
+    return num
 
   def to_json(self):
     json_post = {

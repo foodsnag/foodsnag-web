@@ -8,7 +8,6 @@
         {{event.name }}
       </a>
       </b>
-
       - Happening {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}
 
       {% if current_user.is_attending(event.id) %}
@@ -22,7 +21,9 @@
             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
           </span>
         </div>
+
       {% else %}
+
         <div class="btn-group btn-sm pull-right" role="group">
           <a type="button" class="btn btn-primary pull-right" href="{{ url_for('main.attend', id=event.id) }}">
             I want to go!
@@ -32,10 +33,16 @@
 
       {% endif %}
     </div>
-    Submitted by
-    <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
     {% if current_user == event.author %}
-       - <span class="label label-default">Modify</span>
+      <span class="label label-default">Modify</span>
+    {% endif %}
+     - Submitted by
+    <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
+    -
+    {% if event.num_attendees() > 0 %}
+      {{ event.num_attendees() }} attending
+    {% else %}
+      No one attending yet
     {% endif %}
   </div>
 </div>
