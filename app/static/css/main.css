@@ -34,3 +34,13 @@ html, body {
   -o-background-size: cover;
   background-size: cover;
 }
+
+.form-group #location {
+  font-size: 24pt;
+  height: 42pt;
+}
+
+.dropdown-menu {
+  width: 75%;
+  font-size: 24pt;
+}
