@@ -3,17 +3,24 @@
 
 {% block title %}freets.me - Making an Event{% endblock %}
 
-{% block page_content %}
-<div class="page-header">
-  <h1>Make an Event</h1>
-</div>
+{% block content %}
 
-<div class="col-md-4">
-  {% if current_user.is_authenticated() %}
-    {{ wtf.quick_form(form) }}
-  {% else %}
-    <a href="{{ url_for('auth.register') }}">Register now!!!</a>
-  {% endif %}
-</div>
+<div id="float-box" class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel">
+      <div class="panel-heading">
+        <h1>Make an Event</h1>
+      </div>
+      <div class="panel-body">
+        {% if current_user.is_authenticated() %}
+          {{ wtf.quick_form(form) }}
+        {% else %}
+          <a href="{{ url_for('auth.register') }}">Register now!!!</a>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+<div>
 
 {% endblock %}

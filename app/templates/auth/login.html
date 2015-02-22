@@ -3,14 +3,19 @@
 
 {% block title %}freets.me - Login{% endblock %}
 
-{% block page_content %}
+{% block content %}
 
-
-<div class="col-md-4 col-md-offset-4">
-  <div class="page-header">
-    <h1>Login</h1>
+<div id="float-box" class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel">
+      <div class="panel-heading">
+        <h1>Login</h1>
+      </div>
+      <div class="panel-body">
+        {{ wtf.quick_form(form) }}
+      </div>
+    </div>
   </div>
-  {{ wtf.quick_form(form) }}
 </div>
 
 {% endblock %}

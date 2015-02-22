@@ -18,52 +18,51 @@
   </div>
 {% else %}
 
-  <div class="full">
-    <div id="full-cont" class="container vertical-center">
+<div class="full">
+  <div id="full-cont" class="container vertical-center">
 
-      <!-- Register/Sign in -->
-      <div class="col-md-6">
-        <div class="jumbotron text-center">
+    <!-- Register/Sign in -->
+    <div class="col-md-6">
+      <div class="jumbotron text-center">
 
-          <img alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
-          <h1>freets.me</h1>
-          <p>We like free food, and we know you do too. Find your school and see the
-            listings for free food on your campus. If you like <i>free eats as much as
-            me</i>, please register and begin adding events that provide free food.</p>
-        </div>
+        <img alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
+        <h1>freets.me</h1>
+        <p>We like free food, and we know you do too. Find your school and see the
+          listings for free food on your campus. If you like <i>free eats as much as
+          me</i>, please register and begin adding events that provide free food.</p>
       </div>
+    </div>
 
-      <div class="col-md-6">
-        <div class="jumbotron text-center">
+    <div class="col-md-6">
+      <div class="jumbotron text-center">
 
 
-          <p>Sign up or login to find free food on campus!</p>
+        <p>Sign up or login to find free food on campus!</p>
 
-          <div class="btn-group btn-group-lg" role="group">
-            <!-- Register modal -->
-            <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}">
-              Sign Up!
-            </a>
-            <!-- Login modal -->
-            <a class="btn btn-success btn-lg" href="{{ url_for('auth.login') }}">
-              Login
-            </a>
-          </div> <!-- / button group -->
+        <div class="btn-group btn-group-lg" role="group">
+          <!-- Register modal -->
+          <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}">
+            Sign Up!
+          </a>
+          <!-- Login modal -->
+          <a class="btn btn-success btn-lg" href="{{ url_for('auth.login') }}">
+            Login
+          </a>
+        </div> <!-- / button group -->
 
-          <div class="row">
-          <div class="col-xs-5"><hr></div>
-          <div class="col-xs-2">OR</div>
-          <div class="col-xs-5"><hr></div>
-          </div>
-
-          <h3>Search for your school</h3>
-          {{ wtf.quick_form(schoolSearchForm) }}
-
+        <div class="row">
+        <div class="col-xs-5"><hr></div>
+        <div class="col-xs-2">OR</div>
+        <div class="col-xs-5"><hr></div>
         </div>
+
+        <h3>Search for your school</h3>
+        {{ wtf.quick_form(schoolSearchForm) }}
       </div>
     </div>
   </div>
 
+</div>
 
 {% endif %}
 

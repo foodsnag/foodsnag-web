@@ -1,5 +1,6 @@
 html, body {
   height: 100%;
+  background: #327D71;
 }
 
 .jumbotron {
@@ -7,19 +8,52 @@ html, body {
 }
 
 #full-cont {
-  height:100%;
+  min-height: 400px;
+  height:80%;
   vertical-align:middle;
 }
 
 #content {
-  padding-top:90px;
+  padding-top:40px;
   float: none;
   margin: 0 auto;
+  background-color: #FFF;
+  min-height: 100%;
+}
+
+#float-box {
+  padding-top: 90px;
+}
+
+#sp1, #sp2, #sp3 {
+  margin: 0;
+  padding: 15px;
+}
+
+#sp1 {
+  background-color: #327D71;
+}
+
+#sp2 {
+  background-color: #C67F4F;
+}
+
+#sp3 {
+  background-color: #C6614F;
+}
+
+
+.footer {
+  padding: 10px;
+  background-color: #333;
+}
+.footer .list-inline li{
+  font-color: #fff;
 }
 
 .vertical-center {
   min-height: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   display: flex;
   align-items: center;
 }
@@ -35,13 +69,13 @@ html, body {
 }
 
 .btn-primary {
-  background-color: #AA4839;
-  border-color: #802415;
+  background-color: #5A7C9A;
+  border-color: #214769;
 }
 
-.btn-primary:hover {
-  background-color: #802415;
-  border-color: #802415;
+.btn-primary:hover, .btn-primary:active {
+  background-color: #214769;
+  border-color: #214769;
 }
 
 .btn-danger {
@@ -55,13 +89,13 @@ html, body {
 }
 
 .btn-success {
-  background-color: #AA5C39;
-  border-color: #803615;
+  background-color: #C6614F;
+  border-color: #A25B2B;
 }
 
-.btn-success:hover {
-  background-color: #803615;
-  border-color: #803615;
+.btn-success:hover, .btn-success:active {
+  background-color: #A23D2B;
+  border-color: #A25B2B;
 }
 
 .btn-success.disabled,
