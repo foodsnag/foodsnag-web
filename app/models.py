@@ -97,6 +97,9 @@ class User(UserMixin, db.Model):
   def __repr__(self):
     return self.username
 
+  def __hash__(self):
+    return id(self)
+
   # Flask-Login integration
   def is_authenticated(self):
     return True
@@ -115,7 +118,7 @@ class User(UserMixin, db.Model):
     user = User.query.filter_by(email=email).first()
     user.role_id = Role.query.filter_by(name="Administrator").first().id
     db.session.commit()
-  
+
   def to_json(self):
     json_post = {
       'id' : self.id,
@@ -142,6 +145,9 @@ class Event(db.Model):
   location_id = db.Column(db.Integer, db.ForeignKey('location.id'))
   author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
   attendees = db.relationship('User', secondary=attendees, backref=db.backref('events', lazy='dynamic'))
+
+  def __hash__(self):
+    return id(self)
 
   def generate_fake(count=100):
     from sqlalchemy.exc import IntegrityError
@@ -182,7 +188,10 @@ class Event(db.Model):
       'body' : self.body
     }
     return json_post
-      
+
+  def __hash__(self):
+    return id(self)
+
 
 class Location(db.Model):
   __tablename__ = 'location'
@@ -202,6 +211,9 @@ class Location(db.Model):
       'name' : self.name
     }
     return json_post
+
+  def __hash__(self):
+    return id(self)
 
 class AnonymousUser(AnonymousUserMixin):
   def can(self, permissions):
