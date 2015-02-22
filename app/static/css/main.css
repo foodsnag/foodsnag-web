@@ -13,3 +13,9 @@ body {
 .jumbotron {
   background-color: rgba(000,000,000, .1);
 }
+
+.wide  {
+  background: url('../images/home-scroll/home01.jpg');
+  width: 100%;
+  padding: 10px;
+}
