@@ -33,3 +33,47 @@ html, body {
   -o-background-size: cover;
   background-size: cover;
 }
+
+.btn-primary {
+  background-color: #AA4839;
+  border-color: #802415;
+}
+
+.btn-primary:hover {
+  background-color: #802415;
+  border-color: #802415;
+}
+
+.btn-success {
+  background-color: #AA5C39;
+  border-color: #803615;
+}
+
+.btn-success:hover {
+  background-color: #803615;
+  border-color: #803615;
+}
+
+.panel-primary>.panel-heading {
+  background-color: #AA4839;
+  border-color: #AA4839;
+}
+
+.panel-primary {
+  border-color: #AA4839;
+}
+
+a {
+  color: #AA4839;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #802415;
+  text-decoration: none;
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover,
+.dropdown-menu>.active>a:focus {
+  background-color: #AA4839;
+}
