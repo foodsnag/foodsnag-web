@@ -1,6 +1,5 @@
-html, body {
-  height: 100%;
-  background: #327D71;
+body {
+  padding-top: 70px;
 }
 
 .jumbotron {
@@ -14,7 +13,6 @@ html, body {
 }
 
 #content {
-  padding-top:40px;
   float: none;
   margin: 0 auto;
   background-color: #FFF;
@@ -23,23 +21,6 @@ html, body {
 
 #float-box {
   padding-top: 90px;
-}
-
-#sp1, #sp2, #sp3 {
-  margin: 0;
-  padding: 15px;
-}
-
-#sp1 {
-  background-color: #327D71;
-}
-
-#sp2 {
-  background-color: #C67F4F;
-}
-
-#sp3 {
-  background-color: #C6614F;
 }
 
 
@@ -61,7 +42,6 @@ html, body {
 .full {
   background: url('../images/home-scroll/home03.jpg') no-repeat center center fixed;
   height: 100%;
-  vertical-align: middle;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -69,13 +49,13 @@ html, body {
 }
 
 .btn-primary {
-  background-color: #5A7C9A;
-  border-color: #214769;
+  background-color: #AA4839;
+  border-color: #802415;
 }
 
 .btn-primary:hover, .btn-primary:active {
-  background-color: #214769;
-  border-color: #214769;
+  background-color: #802415;
+  border-color: #802415;
 }
 
 .btn-danger {
@@ -89,13 +69,13 @@ html, body {
 }
 
 .btn-success {
-  background-color: #C6614F;
-  border-color: #A25B2B;
+  background-color: #AA5C39;
+  border-color: #803615;
 }
 
 .btn-success:hover, .btn-success:active {
-  background-color: #A23D2B;
-  border-color: #A25B2B;
+  background-color: #803615;
+  border-color: #803615;
 }
 
 .btn-success.disabled,

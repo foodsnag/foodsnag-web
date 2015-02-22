@@ -13,8 +13,6 @@ def get_loc_by_id(id):
   return loc
 
 class EditProfileForm(Form):
-  text_updates = BooleanField('Send notifications through text')
-  phone = StringField('Phone Number (To recieve event notifications)')
   location = AutocompleteField('School',
         url='auth.autocomplete',
         get_label='name',
@@ -22,10 +20,6 @@ class EditProfileForm(Form):
         validators=[Required()]
     )
   submit = SubmitField('Submit')
-
-  def validate_phone(self, field):
-    if field.data != '' and User.query.filter_by(phone=num).first():
-      raise ValidationError('That number is already in use.')
 
 class MakeEventForm(Form):
   name = StringField('What is the event?', validators=[Required()])

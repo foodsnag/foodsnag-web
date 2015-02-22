@@ -40,16 +40,10 @@ def user(username):
 def edit_profile():
   form = EditProfileForm()
   if form.validate_on_submit():
-    num = form.phone.data.replace(' ', '')
-    if( num != ''):
-      current_user.phone = num
-    current_user.text_updates = form.text_updates.data
     current_user.location = form.location.data
     db.session.add(current_user)
     flash('Your profile has been updated.')
     return redirect(url_for('.user', username=current_user.username))
-  form.phone.data = current_user.phone
-  form.text_updates.data = current_user.text_updates
   form.location = current_user.location
   return render_template('edit_profile.html', form=form)
 
