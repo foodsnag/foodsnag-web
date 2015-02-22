@@ -1,18 +1,43 @@
 {% extends "base.html" %}
-{% block title %}PizzaTime - {{ event.name }}{% endblock %}
+{% block title %}freets.me - {{ event.name }}{% endblock %}
 {% block page_content %}
 
 <div class="page-header">
-<div class="profile-header">
-  <h1>
-  {{ event.name }}
-  </h1>
-  <p>Happening at {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}</p>
-  <p>Submitted by <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a></p>
-  <p><b>Food being served:</b> {{ event.serving }}</p>
-</div>
+  <div class="profile-header">
+    <h1>{{ event.name }}</h1>
+    <p>Submitted by <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a></p>
+  </div>
 </div>
 
-{{ event.body }}
+<div class="row">
+  <div class="col-md-4">
+    <h3>Details</h3>
+    <p><b>Food being served: </b>{{ event.serving }}</p>
+    <p><b>Location: </b>{{ event.place }}</p>
+    <p><b>Date: </b>{{ event.time.strftime('%m/%d/%y') }}</p>
+    <p><b>Time: </b>{{ event.time.strftime('%I:%M %p') }}</p>
+    <p><b>Additional: </b>{{ event.body }}</p>
+  </div>
+
+  <div class="col-md-4">
+    <h3>Attendees</h3>
+    <p>There are {{ event.num_attendees() }} people attending.</p>
+
+    <ul class="list-unstyled">
+      {% if event.attendees %}
+      {% for user in event.attendees %}
+      <li><a href="{{ url_for('.user', username=user) }}">{{ user }}</a></li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+  </div>
+
+  <div class="col-md-4">
+    <h3>Count me in, eh?</h3>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+      Sign Up!
+    </button>
+  </div>
+</div>
 
 {% endblock %}

@@ -1,18 +1,48 @@
 {% for event in events %}
 <div class="event panel panel-primary">
-  <div class="panel-heading">
-    <a class="panel-title" href="{{ url_for('.event', id=event.id) }}">
-      {{event.name }}
-    </a>
-  </div>
   <div class="panel-body">
-    {{event.name }} Happening {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}
-  </div>
-  <div class="panel-footer">
-    Submitted by
-    <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
+
+    <div class="panel-title">
+      <b>
+      <a href="{{ url_for('.event', id=event.id) }}">
+        {{event.name }}
+      </a>
+      </b>
+      - Happening {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}
+
+      {% if current_user.is_attending(event.id) %}
+
+        <div class="btn-group btn-sm pull-right" role="group">
+          <a type="button" class="btn btn-danger" href="{{ url_for('main.unattend', id=event.id) }}">
+            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </a>
+          <span class="btn btn-success" disabled>
+            I'm going!
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+          </span>
+        </div>
+
+      {% else %}
+
+        <div class="btn-group btn-sm pull-right" role="group">
+          <a type="button" class="btn btn-primary pull-right" href="{{ url_for('main.attend', id=event.id) }}">
+            I want to go!
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          </a>
+        </div>
+
+      {% endif %}
+    </div>
     {% if current_user == event.author %}
-       - <span class="label label-danger">Delete</span>
+      <span class="label label-default">Modify</span>
+    {% endif %}
+     - Submitted by
+    <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
+    -
+    {% if event.num_attendees() > 0 %}
+      {{ event.num_attendees() }} attending
+    {% else %}
+      No one attending yet
     {% endif %}
   </div>
 </div>
