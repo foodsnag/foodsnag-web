@@ -35,9 +35,15 @@
 
       <div class="col-md-6">
         <div class="jumbotron text-center">
+          {{ wtf.quick_form(schoolSearchForm) }}
+          <div class="row">
+            <div class="col-xs-5"><hr></div>
+            <div class="col-xs-2">OR</div>
+            <div class="col-xs-5"><hr></div>
+          </div>
 
 
-          <p>Sign up or login to find free food on campus!</p>
+          <p><b>Sign up or login to find free food on campus!</b></p>
 
           <div class="btn-group btn-group-lg" role="group">
             <!-- Register modal -->
@@ -50,14 +56,6 @@
             </a>
           </div> <!-- / button group -->
 
-          <div class="row">
-          <div class="col-xs-5"><hr></div>
-          <div class="col-xs-2">OR</div>
-          <div class="col-xs-5"><hr></div>
-          </div>
-
-          <h3>Search for your school</h3>
-          {{ wtf.quick_form(schoolSearchForm) }}
 
         </div>
       </div>
