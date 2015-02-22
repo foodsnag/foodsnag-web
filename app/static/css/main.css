@@ -3,7 +3,7 @@ html, body {
 }
 
 .jumbotron {
-  background-color: rgba(255,255,255, .6);
+  background-color: rgba(255,255,255, .8);
 }
 
 #full-cont {
@@ -18,17 +18,16 @@ html, body {
 }
 
 .vertical-center {
-  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
-
+  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
 .full {
-  background: url('../images/home-scroll/home01.jpg') no-repeat center center fixed;
+  background: url('../images/home-scroll/home03.jpg') no-repeat center center fixed;
   height: 100%;
-  vertical-align:middle;
+  vertical-align: middle;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
