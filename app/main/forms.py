@@ -27,6 +27,20 @@ class EditProfileForm(Form):
     if field.data != '' and User.query.filter_by(phone=num).first():
       raise ValidationError('That number is already in use.')
 
+class MakeEventForm(Form):
+  name = StringField('What is the event?', validators=[Required()])
+  serving = StringField('What is being offered?', default='Pizza!')
+  place = StringField('Where is this happening (Building/room)?', validators=[Required()])
+  now = datetime.datetime.now()#.strftime('%m-%d %H:%M')
+  time = DateTimeField('When is this happening?', default=now, format='%m/%d %I:%M%p')
+  body = StringField('Anything else we should know?')
+  submit = SubmitField('Submit')
+  def validate_time(self, field):
+    pass
+    #if field.data < datetime.datetime.now():
+    # raise ValidationError('Time must be in the future')
+
+
 class SchoolSearchForm(Form):
   location = AutocompleteField(
         url='main.autocomplete',
