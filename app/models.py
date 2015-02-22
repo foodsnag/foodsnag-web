@@ -64,6 +64,29 @@ class User(UserMixin, db.Model):
   def password(self, password):
     self.password_hash = generate_password_hash(password)
 
+  @staticmethod
+  def generate_fake(count=10):
+    from sqlalchemy.exc import IntegrityError
+    from random import seed
+    import random
+    import forgery_py
+
+    seed()
+    for i in range(count):
+      u = User()
+      u.email=forgery_py.internet.email_address()
+      u.username=forgery_py.internet.user_name(True)
+      u.password=forgery_py.lorem_ipsum.word()
+      u.confirmed=True
+      u.location_id=Location.query.get(random.randrange(1, Location.query.count())).id
+      u.member_since=forgery_py.date.date(True)
+
+      db.session.add(u)
+      try:
+        db.session.commit()
+      except IntegrityError:
+        db.session.rollback()
+
   def verify_password(self, password):
     return check_password_hash(self.password_hash, password)
 
@@ -119,6 +142,9 @@ class Location(db.Model):
   # Store the users and events that belong to this location
   users = db.relationship('User', backref='location', lazy='dynamic')
   events = db.relationship('Event', backref='location', lazy='dynamic')
+
+  def __repr__(self):
+    return self.name
 
 class AnonymousUser(AnonymousUserMixin):
     def can(self, permissions):

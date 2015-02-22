@@ -52,7 +52,7 @@ def create_app(config_name):
 from .models import Permission, User, Event, Location
 
 class UserView(ModelView):
-    column_list = ('username', 'email', 'member_since', 'last_seen', 'role')
+    column_list = ('username', 'email', 'member_since', 'role', 'location')
     form_excluded_columns = ('password_hash','avatar_hash')
     column_searchable_list = ('username', 'email')
 
