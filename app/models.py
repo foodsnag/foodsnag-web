@@ -197,14 +197,15 @@ class Event(db.Model):
   def unattend_event(self, user_id):
     self.attendees.remove(User.query.get(user_id))
     db.session.commit()
-  
+
   def num_attendees(self):
     num = len(self.attendees)
     return num
 
-  def future_events(self, location_id):
+  def future_events(location_id):
     current_time = datetime.utcnow()
-    return self.query.filter(self.time<current_time).filter_by(location_id=location_id).all()
+    all_events = Event.query.filter_by(location_id=location_id)
+    return all_events.filter(Event.time>current_time).all()
 
   def to_json(self):
     json_post = {
