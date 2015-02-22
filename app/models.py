@@ -191,6 +191,10 @@ class Event(db.Model):
     db.session.add(self)
     db.session.commit()
 
+  def unattend_event(self, user_id):
+    self.attendees.remove(User.query.get(user_id))
+    db.session.commit()
+
   def to_json(self):
     json_post = {
       'id' : self.id,

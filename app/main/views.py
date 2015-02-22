@@ -136,3 +136,14 @@ def attend(id):
   event.attend_event(current_user.id)
   flash('You are now attending %s!'% event.name)
   return redirect(url_for('.event', id=event.id))
+
+# Unattend Event
+@main.route('/unattend/<id>')
+def unattend(id):
+  event = Event.query.get_or_404(id)
+  if not current_user.is_attending(id):
+    flash('You aren\'t attending %s!'% event.name)
+    return redirect(url_for('.event', id=event.id))
+  event.unattend_event(current_user.id)
+  flash('You are no longer attending %s!'% event.name)
+  return redirect(url_for('.event', id=event.id))
