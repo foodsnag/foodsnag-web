@@ -135,6 +135,32 @@ class Event(db.Model):
   author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
   attendees = db.relationship('User', secondary=attendees, backref=db.backref('events', lazy='dynamic'))
 
+  def generate_fake(count=100):
+    from sqlalchemy.exc import IntegrityError
+    from random import seed
+    import random
+    import forgery_py
+
+    seed()
+    for i in range(count):
+      e = Event()
+      e.name=forgery_py.lorem_ipsum.word()
+      e.serving=forgery_py.lorem_ipsum.word()
+      e.place=forgery_py.lorem_ipsum.word()
+      e.time=forgery_py.date.date(True)
+      e.body=forgery_py.lorem_ipsum.sentence()
+      e.author_id=User.query.get(random.randrange(1, User.query.count())).id
+      e.location_id=Location.query.get(random.randrange(1, Location.query.count())).id
+
+      db.session.add(e)
+      try:
+        db.session.commit()
+      except IntegrityError:
+        db.session.rollback()
+
+  def __repr__(self):
+    return self.name
+
 class Location(db.Model):
   __tablename__ = 'location'
   id = db.Column(db.Integer, primary_key=True)
