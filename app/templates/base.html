@@ -92,7 +92,7 @@
 {% block content %}
 
 
-  <div id="content" class="container">
+  <div id="content" class="container extra">
 
     {% for message in get_flashed_messages() %}
     <div class="alert alert-warning">
@@ -101,8 +101,11 @@
     </div>
     {% endfor %}
 
-    {% block page_content %}{% endblock %}
-  </div>
+
+    {% block page_content %}
+    {% endblock %}
+    </div>
+
 
 {% endblock %}
 
@@ -113,7 +116,7 @@
   <div class="col-md-6 col-md-offset-4">
 
     <ul class="list-inline">
-    
+
       <li>Home</li>
 
       <li>About</li>
@@ -123,7 +126,7 @@
     </ul>
 
   </div>
-  
+
 </div>
 
 {% endblock %}

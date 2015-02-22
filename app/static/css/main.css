@@ -1,9 +1,9 @@
-body, html {
-  height: 100%;
+body {
+  padding-top: 50px;
 }
 
-body {
-  padding-top: 70px;
+body, html {
+  height: 100%;
 }
 
 .jumbotron {
@@ -122,4 +122,8 @@ a:hover {
 .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover,
 .dropdown-menu>.active>a:focus {
   background-color: #AA4839;
+}
+
+.extra {
+  padding-top: 20px;
 }
