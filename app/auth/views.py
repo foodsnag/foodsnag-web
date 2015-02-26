@@ -17,8 +17,9 @@ def login():
         user = User.query.filter(func.lower(User.username) == func.lower(form.email.data)).first()
     if user is not None and user.verify_password(form.password.data):
       login_user(user, form.remember_me.data)
+      flash('Hey, {0}!'.format(user.username))
       return redirect(request.args.get('next') or url_for('main.index'))
-    flash('Invalid username or password.')
+    flash('Invalid username or password')
   return render_template('auth/login.html', form=form)
 
 

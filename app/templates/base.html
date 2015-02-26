@@ -1,6 +1,11 @@
 <html>
 
 <head>
+
+  <!-- has to be done in head so dialogs can work -->
+  <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='mjs/materialize.min.js')}}"></script>
+
   <title>
     {% block title %}freets.me{% endblock %}
   </title>
@@ -67,14 +72,10 @@
 
   {% for message in get_flashed_messages() %}
 
-    <div class="card freets-yellow lighten-4">
-      <div class="container">
-        <div class="row">
-          <button type="button" class="btn-floating btn-large" data-dismiss="alert">&times;</button>
-        </div>
-      </div>
-        <p>{{ message }}<p>
-    </div>
+    <script type="text/javascript">
+      toast('{{ message }}', 5000);
+    </script>
+
   {% endfor %}
 
 {% endblock %}
@@ -124,7 +125,6 @@
 
 {% block scripts %}
 
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/freets.js') }}"></script>
 
