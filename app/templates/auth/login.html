@@ -1,21 +1,20 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% from "_forms.html" import render_field %}
 
 {% block title %}freets.me - Login{% endblock %}
 
-{% block content %}
+{% block page_content %}
 
-<div class="row extra">
-  <div class="col-md-6 col-md-offset-3">
-    <div class="panel">
-      <div class="panel-heading">
-        <h1>Login</h1>
-      </div>
-      <div class="panel-body">
-        {{ wtf.quick_form(form) }}
-      </div>
-    </div>
-  </div>
-</div>
+
+  <h1>Login</h1>
+  <form class="form" method="post" role="form">
+    {{ render_field(form.email) }}
+    {{ render_field(form.password) }}
+    <p>
+    {{ render_field(form.remember_me) }}
+    </p>
+    {{ form.hidden_tag() }}
+    <input class="btn" type=submit value=Login>
+  </form>
 
 {% endblock %}

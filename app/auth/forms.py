@@ -24,6 +24,7 @@ class RegistrationForm(Form):
   location = AutocompleteField('School',
         url='auth.autocomplete',
         get_label='name',
+        placeholder='',
         getter=get_loc_by_id,
         validators=[Required()]
     )

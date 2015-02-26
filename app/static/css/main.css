@@ -1,129 +1,44 @@
-body {
-  padding-top: 50px;
+.brand-logo {
+  margin: 10px;
 }
 
-body, html {
-  height: 100%;
+.parallax-container {
+  height: 600px;
 }
 
-.jumbotron {
-  background-color: rgba(255,255,255, .8);
+
+.icn i{
+  font-size: 128px;
 }
 
-#full-cont {
-  min-height: 400px;
-  height:100%;
-  vertical-align:middle;
+#desc {
+  margin-top: 20px;
 }
 
-#content {
-  float: none;
-  margin: 0 auto;
-  background-color: #FFF;
-  min-height: 100%;
+#logo {
+  margin: 20px 0;
 }
 
-#float-box {
-  padding-top: 90px;
+#home-card {
+  padding: 20px 0;
 }
 
-.footer {
-  padding: 10px;
-  background-color: #333;
-}
-.footer .list-inline li{
-  font-color: #fff;
+
+footer.page-footer {
+  padding: 10px 0;
+  color: #EEE;
+  margin-top: 0;
 }
 
-.vertical-center {
-  min-height: 100%;
-  min-height: 100%;
-  display: flex;
-  align-items: center;
+.page-footer ul {
+  margin: 0;
 }
 
-.full {
-  background: url('../images/home-scroll/home03.jpg') no-repeat center center fixed;
-  height: 100%;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+.page-footer li a {
+  color: #EEE;
+  font-size: 1.3em;
 }
 
-.btn-primary {
-  background-color: #AA4839;
-  border-color: #802415;
-}
-
-.btn-primary:hover, .btn-primary:active {
-  background-color: #802415;
-  border-color: #802415;
-}
-
-.btn-danger {
-  background-color: #AA4839;
-  border-color: #802415;
-}
-
-.btn-danger:hover {
-  background-color: #802415;
-  border-color: #802415;
-}
-
-.btn-success {
-  background-color: #AA5C39;
-  border-color: #803615;
-}
-
-.btn-success:hover, .btn-success:active {
-  background-color: #803615;
-  border-color: #803615;
-}
-
-.btn-success.disabled,
-.btn-success[disabled],
-fieldset[disabled] .btn-success,
-.btn-success.disabled:hover,
-.btn-success[disabled]:hover,
-fieldset[disabled] .btn-success:hover,
-.btn-success.disabled:focus,
-.btn-success[disabled]:focus,
-fieldset[disabled] .btn-success:focus,
-.btn-success.disabled:active,
-.btn-success[disabled]:active,
-fieldset[disabled] .btn-success:active,
-.btn-success.disabled.active,
-.btn-success[disabled].active,
-fieldset[disabled] .btn-success.active {
-  background-color: #2A7E43;
-  border-color: #2A7E43;
-}
-
-.panel-primary>.panel-heading {
-  background-color: #AA4839;
-  border-color: #AA4839;
-}
-
-.panel-primary {
-  border-color: #AA4839;
-}
-
-a {
-  color: #AA4839;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #802415;
-  text-decoration: none;
-}
-
-.dropdown-menu>.active>a, .dropdown-menu>.active>a:hover,
-.dropdown-menu>.active>a:focus {
-  background-color: #AA4839;
-}
-
-.extra {
-  padding-top: 20px;
+.page-footer i {
+  padding-right: 10px;
 }

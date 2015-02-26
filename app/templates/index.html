@@ -1,62 +1,98 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% from "_forms.html" import render_field %}
 
 {% block title %}freets.me{% endblock %}
 
-{% block content %}
 
-{% if current_user.is_authenticated() %}
-  <div id="content" class="container">
-  <div class="page-header">
-      <h1>Free food at {{ current_user.location.name }}</h1>
-      <a class="btn btn-primary" href="{{ url_for('.make_event') }}">Make an Event!</a>
+{% block banner %}<!-- Banner -->
+
+  <div class="parallax-container">
+    <div id="home-banner" class="section">
+      <div class="container">
+        <div class="row center">
+
+          <img id="logo" src="{{ url_for('static', filename='images/logos/freetsme.svg') }}">
+          <div class="col s12">
+            <div id="home-card" class="card z-depth-2">
+              <div class="container">
+
+{% if not current_user.is_authenticated() %}
+                <h4>Find free food at your school</h4>
+                <form method=post>
+                  <dl>
+                    {{ render_field(schoolSearchForm.location) }}
+                  </dl>
+                </form>
+                <h4>Login or sign up to tell others about free food on campus!</h4>
+                <a class="btn-large" href="{{ url_for('auth.register') }}">
+                  Sign Up!
+                </a>
+                <a class="btn-large" href="{{ url_for('auth.login') }}">
+                  Login
+                </a>
+            {% else %}
+                  <h3>Free food at {{ current_user.location.name }}</h3>
+                  <a class="btn-large" href="{{ url_for('.make_event') }}">Make an Event!</a>
+            {% endif %}
+              </div><!-- / container -->
+            </div><!-- / card -->
+          </div><!-- / col -->
+        </div><!-- / row -->
+      </div><!-- / container -->
+    </div><!-- / home-banner -->
+
+    <div class="parallax"><img src="{{ url_for('static', filename='images/pat1.png') }}"></div>
+
+
   </div>
-{% endif %}
+{% endblock %}<!-- / Banner -->
+
+{% block content %}<!-- Content -->
 
 {% if current_user.is_authenticated() %}
-    {% include 'eventlist.html' %}
+  <div class="section freets-yellow">
+    <div class="container">
+      {% block page_content %}
+        {% include 'eventlist.html' %}
+      {% endblock %}
+    </div>
   </div>
 {% else %}
 
 
-  <div class="full">
-    <div id="full-cont" class="container vertical-center">
+  <div id="desc" class="row">
+    <div class="col s12 m12 l4">
+      <div class="row center icn black-text">
+        <i class="mdi-maps-local-pizza"></i>
+      </div>
+      <p>We like free food, and we know you do too. Find your school and see the
+        listings for free food on your campus. If you like freets.me,
+        please register and begin adding events that provide free food.</p>
+    </div>
 
-      <div class="col-md-6">
-        <div class="jumbotron text-center">
-          <img alt="Brand" src="{{ url_for('static', filename='images/logos/square.svg') }}">
-          <h1>freets.me</h1>
-          <p>We like free food, and we know you do too. Find your school and see the
-            listings for free food on your campus. If you like freets.me,
-            please register and begin adding events that provide free food.</p>
-        </div>
+    <div class="col s12 m12 l4">
+      <div class="row center icn">
+        <i class="mdi-notification-event-available"></i>
+      </div>
+        <p>Just tell us what events you plan to attend and we'll send you a
+        notification shortly before it happens.
+    </div>
+
+    <div class="col s12 m12 l4">
+      <div class="row center icn">
+        <i class="mdi-maps-local-restaurant"></i>
+      </div>
+      <p>We like free food, and we know you do too. Find your school and see the
+        listings for free food on your campus. If you like freets.me,
+        please register and begin adding events that provide free food.</p>
       </div>
 
-      <div class="col-md-6">
-        <div class="jumbotron text-center">
-          <p><b>Login or signup to add free food location on your campus!</b></p>
-          <div class="btn-group btn-group-lg" role="group">
-            <a class="btn btn-primary btn-lg" href="{{ url_for('auth.register') }}">
-              Sign Up!
-            </a>
-            <a class="btn btn-success btn-lg" href="{{ url_for('auth.login') }}">
-              Login
-            </a>
-          </div>
-
-          <div class="row">
-          <div class="col-xs-5"><hr></div>
-          <div class="col-xs-2">OR</div>
-          <div class="col-xs-5"><hr></div>
-          </div>
-
-          {{ wtf.quick_form(schoolSearchForm) }}
-        </div>
-      </div>
   </div>
 
-</div>
 
 {% endif %}
+{% endblock %}<!-- / Content -->
 
+{% block footer %}
+{{ super() }}
 {% endblock %}

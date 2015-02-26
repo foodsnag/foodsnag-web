@@ -1,64 +1,33 @@
-<div class="extra">
+<ul class="collection">
 {% for event in events %}
-<div class="event panel panel-primary">
-  <div class="panel-body">
-
-    <div class="panel-title">
-      <b>
-      <a href="{{ url_for('.event', id=event.id) }}">
-        {{event.name }}
-      </a>
-      </b>
-      - Happening {{ event.time.strftime('%m/%d %I:%M%p') }} at {{ event.place }}
-
-      {% if current_user.is_authenticated() and current_user.is_attending(event.id) %}
-
-        <div class="btn-group btn-sm pull-right" role="group">
-          <a type="button" class="btn btn-danger" href="{{ url_for('main.unattend', id=event.id) }}">
-            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-          </a>
-          <span class="btn btn-success" disabled>
-            I'm going!
-            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-          </span>
-        </div>
-
-      {% else %}
-        {% if current_user.is_authenticated() %}
-        <div class="btn-group btn-sm pull-right" role="group">
-          <a type="button" class="btn btn-primary pull-right" href="{{ url_for('main.attend', id=event.id) }}">
-            I want to go!
-            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          </a>
-        </div>
-        {% else %}
-        <div class="btn-group btn-sm pull-right" role="group">
-          <!-- Register modal -->
-          <a class="btn btn-primary" href="{{ url_for('auth.register') }}">
-            Sign Up!
-          </a>
-          <!-- Login modal -->
-          <a class="btn btn-success" href="{{ url_for('auth.login') }}">
-            Login
-          </a>
-        </div>
-        {% endif %}
-
-      {% endif %}
-    </div>
-    <!-- {% if current_user == event.author %}
-      <span class="label label-default">Modify</span>
-    {% endif %} -->
-    <i>Submitted by
-    <a href="{{ url_for('.user', username=event.author.username) }}">{{ event.author.username }}</a>
-    -
+  {{event.id}}
+  <a href="#" class="collection-item avatar">
+    <i class="mdi-maps-local-restaurant circle"></i>
+    <span class="title">{{event.name}}</span>
+    <span class="secondary-content badge">
     {% if event.num_attendees() > 0 %}
       {{ event.num_attendees() }} attending
     {% else %}
       No one attending yet
     {% endif %}
-  </i>
-  </div>
-</div>
+    </span>
+  </a>
+
+
+
 {% endfor %}
-</div>
+</ul>
+
+    {% if not current_user.is_authenticated() %}
+      <a class="btn-floating" href="{{ url_for('auth.register') }}">
+        Sign Up!
+      </a>
+      <a class="btn-floating" href="{{ url_for('auth.login') }}">
+        Login
+      </a>
+      {% if event.num_attendees() > 0 %}
+        {{ event.num_attendees() }} attending
+      {% else %}
+        No one attending yet
+      {% endif %}
+    {% endif %}

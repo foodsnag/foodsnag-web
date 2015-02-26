@@ -44,7 +44,7 @@ class SchoolSearchForm(Form):
   location = AutocompleteField(
         label='Search for your school',
         url='main.autocomplete',
-        placeholder='Your school...',
+        placeholder='',
         get_label='name',
         getter=get_loc_by_id
     )
