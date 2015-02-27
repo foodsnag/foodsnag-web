@@ -6,9 +6,12 @@
 
 /* Parallax / header */
 
+#home-banner {
+  display: block;
+}
+
 .parallax-container {
-  height: 50%;
-  min-height: 600px;
+  height: auto;
 }
 
 ul.autocomplete {
