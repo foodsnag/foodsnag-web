@@ -1,0 +1,72 @@
+/* Nav bar */
+
+.brand-logo {
+  margin: 10px 0;
+}
+
+/* Parallax / header */
+
+.parallax-container {
+  height: 50%;
+  min-height: 600px;
+}
+
+ul.autocomplete {
+  @extend .collection;
+  position: absolute;
+  top: 0px;
+  background-color: color("shades", "white");
+}
+
+ul.autocomplete li {
+  @extend .collection-item;
+}
+
+/* abs or it gets moved down on resize */
+.parallax img{
+  position: absolute;
+  display: block;
+  min-height: 100%;
+}
+
+.parallax {
+  position: absolute;
+}
+
+.icn i{
+  font-size: 128px;
+}
+
+#desc {
+  margin-top: 20px;
+}
+
+#logo {
+  margin: 20px 0;
+}
+
+#home-card {
+  padding: 20px 0;
+}
+
+/* footer */
+
+footer.page-footer {
+  padding: 10px 0;
+  color: #EEE;
+  margin-top: 0;
+}
+
+.page-footer ul {
+  margin: 0;
+}
+
+.page-footer li a {
+  color: #EEE;
+  font-size: 1.3em;
+}
+
+.page-footer i {
+  padding-right: 10px;
+}
+

@@ -10,9 +10,9 @@
     <div id="home-banner" class="section">
       <div class="container">
         <div class="row center">
+          <div class="col s12">
 
           <img id="logo" src="{{ url_for('static', filename='images/logos/freetsme.svg') }}">
-          <div class="col s12">
             <div id="home-card" class="card z-depth-2">
               <div class="container">
 
@@ -21,6 +21,7 @@
                 <form method=post>
                   <dl>
                     {{ render_field(schoolSearchForm.location) }}
+                    {{ schoolSearchForm.hidden_tag() }}
                   </dl>
                 </form>
                 <h4>Login or sign up to tell others about free food on campus!</h4>
@@ -59,7 +60,7 @@
   </div>
 {% else %}
 
-
+  <div class="container">
   <div id="desc" class="row">
     <div class="col s12 m12 l4">
       <div class="row center icn black-text">
@@ -87,6 +88,7 @@
         please register and begin adding events that provide free food.</p>
       </div>
 
+  </div>
   </div>
 
 

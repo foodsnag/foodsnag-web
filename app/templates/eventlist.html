@@ -14,10 +14,6 @@
   </a>
 
 
-
-{% endfor %}
-</ul>
-
     {% if not current_user.is_authenticated() %}
       <a class="btn-floating" href="{{ url_for('auth.register') }}">
         Sign Up!
@@ -31,3 +27,7 @@
         No one attending yet
       {% endif %}
     {% endif %}
+
+{% endfor %}
+</ul>
+

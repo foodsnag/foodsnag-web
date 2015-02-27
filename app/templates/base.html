@@ -2,7 +2,6 @@
 
 <head>
 
-  <!-- has to be done in head so dialogs can work -->
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='mjs/materialize.min.js')}}"></script>
 
@@ -12,7 +11,6 @@
 
   {% block head %}
     <link class="ui" href="{{ url_for('static', filename='css/materialize.css') }}" rel="stylesheet"></link>
-    <link class="ui" href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet"></link>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   {% endblock %}
@@ -66,18 +64,6 @@
 <main class="content">
 
 {% block banner %}
-{% endblock %}
-
-{% block alerts %}
-
-  {% for message in get_flashed_messages() %}
-
-    <script type="text/javascript">
-      toast('{{ message }}', 5000);
-    </script>
-
-  {% endfor %}
-
 {% endblock %}
 
 {% block content %}
@@ -138,6 +124,15 @@
 
 <script type="text/javascript" src="{{ url_for('static', filename='mjs/materialize.min.js')}}"></script>
 
+{% endblock %}
+
+  <!-- has to be done after scripts so dialogs can work -->
+{% block alerts %}
+  {% for message in get_flashed_messages() %}
+    <script type="text/javascript">
+      toast('{{ message }}', 5000);
+    </script>
+  {% endfor %}
 {% endblock %}
 
 </body>
