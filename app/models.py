@@ -128,6 +128,9 @@ class User(UserMixin, db.Model):
     user.role_id = Role.query.filter_by(name="Administrator").first().id
     db.session.commit()
 
+  def num_submitted(self):
+    return self.submitted.count()
+
   def to_json(self):
     json_post = {
       'id' : self.id,
@@ -243,6 +246,12 @@ class Location(db.Model):
       'name' : self.name
     }
     return json_post
+
+  def num_events(self):
+    return self.events.count()
+
+  def num_users(self):
+    return self.users.count()
 
   def __hash__(self):
     return id(self)

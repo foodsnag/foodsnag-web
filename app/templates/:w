@@ -5,8 +5,7 @@
 {% block banner_content %}
 
 <h4 class="white-text">Free food at {{ location.name }}</h4>
-<p class="white-text">{{ location.num_users() }} users, 
-{{ location.num_events() }} events</p>
+<h5 class="white-text">{{ location.num_events() }}</h5>
 
 {% endblock %}
 

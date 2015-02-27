@@ -4,11 +4,14 @@
 
 {% block banner_content %}
 
-    <i class="mdi-action-perm-identity usr"></i> 
-    <h2 class="white-text">{{ user.username }} from {{ user.location.name }}</h2>
+    <i class="mdi-action-perm-identity usr circle freets-orange z-depth-3"></i> 
     <h4 class="white-text">
-    <p>Member since {{ user.member_since.strftime('%B %d, %Y') }}</p>
-    </h4>
+    {{ user.username }} from 
+    <a class="white-text" href="{{ url_for('main.location', id=user.location.id) }}">
+      {{ user.location.name }}
+    </a></h4>
+    <p class="white-text">{{ user.num_submitted() }} submitted events</p>
+    <p class="white-text">Member since {{ user.member_since.strftime('%B %d, %Y') }}</p>
   
 {% endblock %}
 
