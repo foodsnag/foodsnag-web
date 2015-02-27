@@ -7923,6 +7923,10 @@ ul.autocomplete {
 #home-card {
   padding: 20px 0; }
 
+.usr {
+  color: #FFFFFF;
+  font-size: 64px; }
+
 /* footer */
 footer.page-footer {
   padding: 10px 0;

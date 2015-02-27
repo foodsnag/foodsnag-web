@@ -64,6 +64,24 @@
 <main class="content">
 
 {% block banner %}
+  <div class="parallax-container">
+    <div id="home-banner" class="section">
+      <div class="container">
+        <div class="row center">
+          <div class="col s12">
+
+            {% block banner_content %}
+            {% endblock %}
+
+          </div><!-- / col -->
+        </div><!-- / row -->
+      </div><!-- / container -->
+    </div><!-- / home-banner -->
+
+    <div class="parallax"><img src="{{ url_for('static', filename='images/pat1.png') }}"></div>
+
+
+  </div>
 {% endblock %}
 
 {% block content %}

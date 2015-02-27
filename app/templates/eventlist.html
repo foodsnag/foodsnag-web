@@ -1,7 +1,6 @@
 <ul class="collection">
 {% for event in events %}
-  {{event.id}}
-  <a href="#" class="collection-item avatar">
+  <a href="{{ url_for('main.event', id=event.id) }}" class="collection-item avatar">
     <i class="mdi-maps-local-restaurant circle"></i>
     <span class="title">{{event.name}}</span>
     <span class="secondary-content badge">

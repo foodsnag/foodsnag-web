@@ -4,48 +4,34 @@
 {% block title %}freets.me{% endblock %}
 
 
-{% block banner %}<!-- Banner -->
+{% block banner_content %}<!-- Banner -->
 
-  <div class="parallax-container">
-    <div id="home-banner" class="section">
-      <div class="container">
-        <div class="row center">
-          <div class="col s12">
 
-          <img id="logo" src="{{ url_for('static', filename='images/logos/freetsme.svg') }}">
-            <div id="home-card" class="card z-depth-2">
-              <div class="container">
+  <img id="logo" src="{{ url_for('static', filename='images/logos/freetsme.svg') }}">
+  <div id="home-card" class="card z-depth-2">
+    <div class="container">
 
 {% if not current_user.is_authenticated() %}
-                <h4>Find free food at your school</h4>
-                <form method=post>
-                  <dl>
-                    {{ render_field(schoolSearchForm.location) }}
-                    {{ schoolSearchForm.hidden_tag() }}
-                  </dl>
-                </form>
-                <h4>Login or sign up to tell others about free food on campus!</h4>
-                <a class="btn-large" href="{{ url_for('auth.register') }}">
-                  Sign Up!
-                </a>
-                <a class="btn-large" href="{{ url_for('auth.login') }}">
-                  Login
-                </a>
-            {% else %}
-                  <h3>Free food at {{ current_user.location.name }}</h3>
-                  <a class="btn-large" href="{{ url_for('.make_event') }}">Make an Event!</a>
-            {% endif %}
-              </div><!-- / container -->
-            </div><!-- / card -->
-          </div><!-- / col -->
-        </div><!-- / row -->
-      </div><!-- / container -->
-    </div><!-- / home-banner -->
-
-    <div class="parallax"><img src="{{ url_for('static', filename='images/pat1.png') }}"></div>
-
-
-  </div>
+      <h4>Find free food at your school</h4>
+      <form method=post>
+        <dl>
+          {{ render_field(schoolSearchForm.location) }}
+          {{ schoolSearchForm.hidden_tag() }}
+        </dl>
+      </form>
+      <h4>Login or sign up to tell others about free food on campus!</h4>
+      <a class="btn-large" href="{{ url_for('auth.register') }}">
+        Sign Up!
+      </a>
+      <a class="btn-large" href="{{ url_for('auth.login') }}">
+        Login
+      </a>
+  {% else %}
+        <h3>Free food at {{ current_user.location.name }}</h3>
+        <a class="btn-large" href="{{ url_for('.make_event') }}">Make an Event!</a>
+  {% endif %}
+    </div><!-- / container -->
+  </div><!-- / card -->
 {% endblock %}<!-- / Banner -->
 
 {% block content %}<!-- Content -->

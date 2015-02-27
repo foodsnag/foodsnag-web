@@ -1,18 +1,21 @@
 {% extends "base.html" %}
 {% block title %}PizzaTime - {{ user.username }}{% endblock %}
+
+
+{% block banner_content %}
+
+    <i class="mdi-action-perm-identity usr"></i> 
+    <h2 class="white-text">{{ user.username }} from {{ user.location.name }}</h2>
+    <h4 class="white-text">
+    <p>Member since {{ user.member_since.strftime('%B %d, %Y') }}</p>
+    </h4>
+  
+{% endblock %}
+
 {% block page_content %}
 
 <div class="page-header">
   <div class="profile-header"> 
-    <h1>
-    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.username }}
-    from {{ user.location.name }}
-    {% if user == current_user %}
-      <a class="btn btn-primary pull-right" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
-    {% endif %}
-    </h1>
-    <p>Member since {{ user.member_since.strftime('%B %d, %Y') }}</p>
-    </p>
   </div>
 </div>
 <h3>Events by {{ user.username }}</h3>
