@@ -7893,9 +7893,11 @@ ul.side-nav.fixed .collapsible-body li.active {
   margin: 10px 0; }
 
 /* Parallax / header */
+#home-banner {
+  display: block; }
+
 .parallax-container {
-  height: 50%;
-  min-height: 600px; }
+  height: auto; }
 
 ul.autocomplete {
   position: absolute;
@@ -7925,7 +7927,7 @@ ul.autocomplete {
 
 .usr {
   color: #FFFFFF;
-  font-size: 64px; }
+  font-size: 128px; }
 
 /* footer */
 footer.page-footer {

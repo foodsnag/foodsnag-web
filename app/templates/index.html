@@ -6,11 +6,9 @@
 
 {% block banner_content %}<!-- Banner -->
 
-
-
 {% if not current_user.is_authenticated() %}
 
-  <img id="logo" src="{{ url_for('static', filename='images/logos/freetsme.svg') }}">
+  <img id="logo" class="hide-on-small-only" src="{{ url_for('static', filename='images/logos/freetsme.svg') }}">
   <div id="home-card" class="card z-depth-2">
     <div class="container">
       <h4>Find free food at your school</h4>

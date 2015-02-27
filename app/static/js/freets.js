@@ -1,8 +1,5 @@
 $(document).ready(function(){   
   $('.dropdown-button').dropdown({ hover: false });
-});
-
-$(document).ready(function(){
+  $(".button-collapse").sideNav();
   $('.parallax').parallax();
 });
-

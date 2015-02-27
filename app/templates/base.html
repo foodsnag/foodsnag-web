@@ -21,41 +21,60 @@
 {% block navbar %}
 
 <nav role="navigation">
+
+
   <div class="nav-wrapper z-depth-1">
     <div class="container">
 
       <a href="{{ url_for('main.index') }}"><img class="brand-logo" height="70%" src="{{ url_for('static', filename='images/logos/freetsme.svg') }}"></a>
 
-      <div class="right">
-        <ul>
+
+      <a href="#" data-activates="mobile-menu" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+
+      <ul class="right hide-on-med-and-down">
         {% if current_user.is_authenticated() %}
 
-          <!-- Dropdown -->
-          <ul id="nav-dropdown" class="dropdown-content">
-            <li><a href="{{ url_for('main.user', username=current_user.username) }}">View Profile</a></li>
-            {% if current_user.role_id == 1 %}
-              <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-            {% endif %}
-            <li><a href="{{ url_for('main.edit_profile') }}">Edit Profile</a></li>
-            <li class="divider"></li>
-            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-          
-          </ul>
+        <!-- Dropdown -->
+        <ul id="nav-dropdown" class="dropdown-content">
+          <li><a href="{{ url_for('main.user', username=current_user.username) }}">View Profile</a></li>
+          {% if current_user.role_id == 1 %}
+            <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+          {% endif %}
+          <li><a href="{{ url_for('main.edit_profile') }}">Edit Profile</a></li>
+          <li class="divider"></li>
+          <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+        
+        </ul>
 
-          <li><a class="dropdown-button" href="#!" data-activates="nav-dropdown">
-            <i class="mdi-action-perm-identity left"></i>
-            {{current_user.username}}
-            <i class="mdi-navigation-arrow-drop-down right"></i>
-          </a></li>
-
+        <li><a class="dropdown-button" href="#!" data-activates="nav-dropdown">
+          <i class="mdi-action-perm-identity left"></i>
+          {{current_user.username}}
+          <i class="mdi-navigation-arrow-drop-down right"></i>
+        </a></li>
 
         {% else %}
             <li><a href="{{ url_for('auth.login') }}">Login</a></li>
             <li><a href="{{ url_for('auth.register') }}">Register</a></li>
         {% endif %}
-        </ul>
-      </div>
-     </div>
+      </ul>
+
+      <ul class="side-nav" id="mobile-menu">
+        {% if current_user.is_authenticated() %}
+
+        <li><a href="{{ url_for('main.user', username=current_user.username) }}">View Profile</a></li>
+        {% if current_user.role_id == 1 %}
+          <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('main.edit_profile') }}">Edit Profile</a></li>
+        <li class="divider"></li>
+        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+
+        {% else %}
+            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+            <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+        {% endif %}
+      </ul>
+    </div>
   </div>
 </nav>
 
