@@ -1,23 +1,21 @@
 {% extends "base.html" %}
-{% import "bootstrap/wtf.html" as wtf %}
+{% from "_forms.html" import render_field %}
 
 {% block title %}freets.me - Making an Event{% endblock %}
 
-{% block content %}
+{% block banner %}
+{% endblock %}
 
-<div class="col-md-6 col-md-offset-3">
-  <div class="panel">
-    <div class="panel-heading">
-      <h1>Make an Event</h1>
-    </div>
-    <div class="panel-body">
-      {% if current_user.is_authenticated() %}
-        {{ wtf.quick_form(form) }}
-      {% else %}
-        <a href="{{ url_for('auth.register') }}">Register now!!!</a>
-      {% endif %}
-    </div>
-  </div>
-</div>
+{% block page_content %}
+
+  <h1>Make Event</h1>
+  <form class="form" method="post" role="form">
+    {{ render_field(form.name) }}
+    {{ render_field(form.place) }}
+    {{ render_field(form.time) }}
+    {{ render_field(form.body) }}
+    {{ render_field(form.submit) }}
+    {{ form.hidden_tag() }}
+  </form>
 
 {% endblock %}
