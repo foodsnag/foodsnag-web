@@ -13,12 +13,14 @@ def get_loc_by_id(id):
   return loc
 
 class EditProfileForm(Form):
-  location = AutocompleteField('School',
-        url='auth.autocomplete',
+  location = AutocompleteField(
+        label='Search for your school',
+        url='main.autocomplete',
+        placeholder='',
         get_label='name',
-        getter=get_loc_by_id,
-        validators=[Required()]
-    )
+        getter=get_loc_by_id
+  )
+  email_notifications = BooleanField('Email me about upcoming events')
   submit = SubmitField('Submit')
 
 class MakeEventForm(Form):
@@ -37,8 +39,6 @@ class MakeEventForm(Form):
     pass
     #if field.data < datetime.datetime.now():
     # raise ValidationError('Time must be in the future')
-
-
 
 class SchoolSearchForm(Form):
   location = AutocompleteField(

@@ -12,8 +12,12 @@
 <div class="container">
   <form method=post>
     <dl>
-      {{ render_field(form.submit) }}
+      {{ render_field(form.location) }}
+      {{ render_field(form.email_notifications) }}
       {{ form.hidden_tag() }}
+      <p>
+      <input class="btn" type=submit value="Submit">
+      </p>
     </dl>
   </form>
 </div>

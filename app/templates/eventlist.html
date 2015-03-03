@@ -1,16 +1,32 @@
-<ul class="collection">
+<ul class="collapsible" data-collapsible="accordion">
 {% for event in events %}
-  <a href="{{ url_for('main.event', id=event.id) }}" class="collection-item avatar">
+
+  <li>
+    <div class="collapsible-header">
     <i class="mdi-maps-local-restaurant circle"></i>
     <span class="title">{{event.name}}</span>
     <span class="secondary-content badge">
-    {% if event.num_attendees() > 0 %}
-      {{ event.num_attendees() }} attending
-    {% else %}
-      No one attending yet
-    {% endif %}
+    {{ event.time.strftime('%H:%M - %B %d, %Y') }}
     </span>
+    </div>
+    <div class="collapsible-body">
+      <div class="row">
+        <div class="col s4 offset-s1">
+          At {{ event.place }}<br>
+          Serving: {{ event.serving }}
+        </div>
+        <div class="col s6 right-align"> 
+          {% if event.num_attendees() > 0 %}
+            {{ event.num_attendees() }} attending
+          {% else %}
+            No one attending yet
+          {% endif %}
+          <a class="btn-floating" href="{{ url_for('main.attend', id=event.id) }}"><i class="mdi-content-add"></i></a>
+        </div>
+      </div>
+    </div>
   </a>
+  </li>
 
 
     {% if not current_user.is_authenticated() %}

@@ -42,10 +42,10 @@ def edit_profile():
   form = EditProfileForm()
   if form.validate_on_submit():
     current_user.location = form.location.data
+    current_user.email_notifications = form.email_notifications.data
     db.session.add(current_user)
     flash('Your profile has been updated.')
     return redirect(url_for('.user', username=current_user.username))
-  form.location = current_user.location
   return render_template('edit_profile.html', form=form)
 
 def find_loc(query):

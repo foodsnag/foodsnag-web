@@ -38,6 +38,7 @@ def register():
     user.email = form.email.data
     user.username = form.username.data
     user.location = form.location.data
+    user.email_notifications = form.email_notifications.data
     user.password = form.password.data
     user.confirmed = True
     db.session.add(user)

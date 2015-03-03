@@ -28,6 +28,7 @@ class RegistrationForm(Form):
         getter=get_loc_by_id,
         validators=[Required()]
     )
+  email_notifications = BooleanField('Email me about upcoming events')
   password = PasswordField('Password', validators=[
     Required(), EqualTo('password2', message='Passwords must match.')])
   password2 = PasswordField('Confirm password', validators=[Required()])

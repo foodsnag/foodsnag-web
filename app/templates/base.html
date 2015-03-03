@@ -22,7 +22,6 @@
 
 <nav role="navigation">
 
-
   <div class="nav-wrapper z-depth-1">
     <div class="container">
 
@@ -60,7 +59,6 @@
 
       <ul class="side-nav" id="mobile-menu">
         {% if current_user.is_authenticated() %}
-
         <li><a href="{{ url_for('main.user', username=current_user.username) }}">View Profile</a></li>
         {% if current_user.role_id == 1 %}
           <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
