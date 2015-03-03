@@ -11,11 +11,12 @@
   <h1>Make Event</h1>
   <form class="form" method="post" role="form">
     {{ render_field(form.name) }}
+    {{ render_field(form.serving) }}
     {{ render_field(form.place) }}
     {{ render_field(form.time) }}
     {{ render_field(form.body) }}
-    {{ render_field(form.submit) }}
     {{ form.hidden_tag() }}
+    <input class="btn" type=submit value="Submit">
   </form>
 
 {% endblock %}

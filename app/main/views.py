@@ -79,8 +79,9 @@ def make_event():
       author=current_user._get_current_object(),
       location=current_user.location)
     db.session.add(event)
+    db.session.commit()
     # Start the mail timer
-    return redirect(url_for('.index'))
+    return redirect(url_for('main.index'))
   return render_template('make-event.html', form=form)
 
 
