@@ -74,6 +74,14 @@ def deploy():
     Role.insert_roles()
 
 @manager.command
+def make_admin(username):
+  u = User.query.filter_by(username=username).first()
+  u.role_id = 1
+  print(u.username,'was made admin')
+  db.session.commit()
+  
+
+@manager.command
 def importschools(fpath):
     """Import CSV file with all schools into database"""
     n = 0
