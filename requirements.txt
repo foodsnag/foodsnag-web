@@ -21,3 +21,4 @@ itsdangerous==0.23
 python-dateutil
 git+https://github.com/freets-me/flask-autocomplete.git
 ForgeryPy==0.1
+celery==3.1.17
