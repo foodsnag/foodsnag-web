@@ -1,9 +1,11 @@
-from datetime import datetime
+from datetime import datetime, timedelta
+from dateutil import tz
 import hashlib
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app, request, url_for
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from . import db, login_manager
+from .tasks import event_notify
 
 class Permission:
   ADMINISTER = 0x80
@@ -187,28 +189,48 @@ class Event(db.Model):
     except IntegrityError:
       db.session.rollback()
 
+  def future_events(location_id):
+    """ Returns all future events """
+    # Autodetects timezone and lists events in the future
+    from_zone = tz.tzutc()
+    to_zone = tz.tzlocal()
+    utc = datetime.utcnow()
+    utc = utc.replace(tzinfo=from_zone)
+    actual = utc.astimezone(to_zone)
+    all_events = Event.query.filter_by(location_id=location_id)
+
+    return all_events.filter(Event.time>actual).all()
+
   def __repr__(self):
     return self.name
 
   def attend_event(self, user_id):
+    """ Adds a user to an event's attendees """
     u = User.query.get(user_id)
     self.attendees.append(u)
-
+    # Create a notification event
+    # TODO: check if user wants notifications
+    # Have to make local to utc
+    to_zone = tz.tzutc()
+    from_zone = tz.tzlocal()
+    utc = alarm
+    utc = utc.replace(tzinfo=from_zone)
+    alarm = utc.astimezone(to_zone)
+    # Notify 30 min before event
+    alarm = self.time - timedelta(minutes=30)
+    event_notify.apply_async( (u.username, alarm), eta=alarm )
     db.session.add(self)
     db.session.commit()
 
   def unattend_event(self, user_id):
+    """ Removes a user from an event's attendees """
     self.attendees.remove(User.query.get(user_id))
     db.session.commit()
 
   def num_attendees(self):
+    """ Returns the number of attendees going to an event """
     num = len(self.attendees)
     return num
-
-  def future_events(location_id):
-    current_time = datetime.utcnow()
-    all_events = Event.query.filter_by(location_id=location_id)
-    return all_events.filter(Event.time>current_time).all()
 
   def to_json(self):
     json_post = {
