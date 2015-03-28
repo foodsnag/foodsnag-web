@@ -32,6 +32,7 @@
     <div class="container">
       <h3>Free food at {{ current_user.location.name }}</h3>
       <a class="btn-large waves-effect waves-light" href="{{ url_for('.make_event') }}">Make an Event!</a>
+      <h4>There's {{ events | length }} upcoming events!</h4>
     </div>
   </div>
   {% endif %}

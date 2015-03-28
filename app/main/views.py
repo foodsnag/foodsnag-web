@@ -24,8 +24,8 @@ def index():
     if schoolSearch.validate_on_submit():
       if hasattr(schoolSearch.location.data, 'id'):
         return redirect(url_for('main.location', id=schoolSearch.location.data.id))
-
     return render_template('index.html', schoolSearchForm=schoolSearch)
+
 
 
 ## User stuff
@@ -77,7 +77,7 @@ def make_event():
     d = form.date.data
     t = form.time.data
     # Combine date and time
-    t = datetime.datetime(d.year, d.month, d.day, t.hour, t.minute)
+    t = datetime.datetime(datetime.datetime.now().year, d.month, d.day, t.hour, t.minute)
     print(t)
     event = Event(name=form.name.data, serving=form.serving.data,\
       time=t, body=form.body.data,\
