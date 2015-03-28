@@ -41,8 +41,11 @@ def user(username):
 @login_required
 def edit_profile():
   form = EditProfileForm()
+  form.location.data = current_user.location
+  form.email_notifications.data = current_user.email_notifications
   if form.validate_on_submit():
-    current_user.location = form.location.data
+    if form.location.data != '':
+      current_user.location = form.location.data
     current_user.email_notifications = form.email_notifications.data
     db.session.add(current_user)
     flash('Your profile has been updated.')
