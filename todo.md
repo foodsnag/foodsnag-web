@@ -1,7 +1,7 @@
 
 ## Important stuff
 
-- [ ] New name
+- [x] New name ( Bought pizzaswipe.com and hungrystudent.com )
 - [ ] Scheduled events/cron jobs for notifications
 - [ ] E-mail notifications
 - [ ] Text notifications
