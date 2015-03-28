@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% from "_forms.html" import render_field %}
+{% from "_forms.html" import render_date %}
+{% from "_forms.html" import render_time %}
 
 {% block title %}freets.me - Making an Event{% endblock %}
 
@@ -13,7 +15,8 @@
     {{ render_field(form.name) }}
     {{ render_field(form.serving) }}
     {{ render_field(form.place) }}
-    {{ render_field(form.time) }}
+    {{ render_date(form.date) }}
+    {{ render_time(form.time) }}
     {{ render_field(form.body) }}
     {{ form.hidden_tag() }}
     <input class="btn" type=submit value="Submit">

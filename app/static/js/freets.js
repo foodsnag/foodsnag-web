@@ -6,4 +6,14 @@ $(document).ready(function(){
   $('.collapsible').collapsible({
     accordion : true
   });
+ $('.datepicker').pickadate({
+    format: 'dddd mmmm dd',
+    selectMonths: false,
+    selectYears: true
+  });
+ $('.timepicker').pickatime({
+    format: 'h:i A'
+  });
 });
+
+

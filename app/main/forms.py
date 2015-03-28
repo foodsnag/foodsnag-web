@@ -29,12 +29,21 @@ class MakeEventForm(Form):
     ("Burgers","Burgers"), ("Candy","Candy"), ("Ice cream","Ice cream"), ("Drinks","Drinks"), ("Alcohol","Alcohol"), ("Chicken","Chicken"), ("Cake","Cake"), ("BBQ","BBQ"), ("Coffee","Coffee"),
     ("Tea","Tea")]
   serving = SelectField('', choices=food_types)
-  place = StringField('Where is this happening (Building/room)?', validators=[Required()])
+  place = StringField('Where is this happening (Building/room)?',
+    validators=[Required()])
+
   now = datetime.datetime.now()#.strftime('%m-%d %H:%M')
-  time = DateTimeField('When is this happening?', default=now, format='%m/%d %I:%M%p')
+  date = DateTimeField('What date is this happening?',
+    default=now, format='%A %B %d')
+
+  twelve = datetime.datetime(now.year, now.month, now.day, 12)
+  time = DateTimeField('When time is this happening?',
+    default=twelve, format='%I:%M %p')
+  
   body = StringField('Anything else we should know?')
   submit = SubmitField('Submit')
-  def validate_time(self, field):
+
+  def validate_date(self, field):
     pass
     #if field.data < datetime.datetime.now():
     # raise ValidationError('Time must be in the future')
