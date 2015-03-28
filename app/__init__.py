@@ -80,6 +80,9 @@ class UserView(ModelView):
 
 class EventView(ModelView):
 
+    column_list = ( 'id', 'name', 'place', 'time', 'location', 'author'  )
+    column_searchable_list = ( 'name', 'place' )
+
     def __init__(self, session):
         # You can pass name and other parameters if you want to
         super(EventView, self).__init__(Event, session, name="Events")
@@ -97,6 +100,9 @@ class EventView(ModelView):
             return redirect(url_for('auth.login'))
 
 class LocationView(ModelView):
+    
+    column_list = ( 'id', 'name', 'url' )
+    column_searchable_list = ( 'name', )
 
     def __init__(self, session):
         # You can pass name and other parameters if you want to
