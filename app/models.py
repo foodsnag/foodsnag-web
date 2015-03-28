@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 from dateutil import tz
 import hashlib
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -76,7 +76,7 @@ class User(UserMixin, db.Model):
     self.password_hash = generate_password_hash(password)
 
   @staticmethod
-  def generate_fake(count=10):
+  def generate_fake(count=10, loc=None):
     from sqlalchemy.exc import IntegrityError
     from random import seed
     import random
@@ -89,7 +89,10 @@ class User(UserMixin, db.Model):
       u.username=forgery_py.internet.user_name(True)
       u.password=forgery_py.lorem_ipsum.word()
       u.confirmed=True
-      u.location_id=Location.query.get(random.randrange(1, Location.query.count())).id
+      if loc == None:
+        u.location_id=Location.query.get(random.randrange(1, Location.query.count())).id
+      else:
+        u.location_id=loc
       u.member_since=forgery_py.date.date(True)
 
       db.session.add(u)
@@ -149,7 +152,7 @@ def load_user(user_id):
 class Event(db.Model):
   __tablename__ = 'event'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(128))
+  name = db.Column(db.String(128), index=True)
   serving = db.Column(db.String(128))
   place = db.Column(db.String(128))
   time = db.Column(db.DateTime, index=True)
@@ -163,7 +166,7 @@ class Event(db.Model):
   def __hash__(self):
     return id(self)
 
-  def generate_fake(count=100):
+  def generate_fake(count=100,loc=None):
     from sqlalchemy.exc import IntegrityError
     from random import seed
     import random
@@ -175,11 +178,13 @@ class Event(db.Model):
       e.name=forgery_py.lorem_ipsum.word()
       e.serving=forgery_py.lorem_ipsum.word()
       e.place=forgery_py.lorem_ipsum.word()
-      e.time=forgery_py.date.date(past=True)
+      e.time= datetime.combine(forgery_py.date.date(past=False), time(hour=random.randrange(0,23),minute=random.randrange(0,59)))
       e.body=forgery_py.lorem_ipsum.sentence()
       e.author_id=User.query.get(random.randrange(1, User.query.count())).id
-      e.location_id=Location.query.get(random.randrange(1, Location.query.count())).id
-
+      if loc == None:
+        e.location_id=Location.query.get(random.randrange(1, Location.query.count())).id
+      else:
+        e.location_id=loc
       db.session.add(e)
 
       if not i % 100:
@@ -213,11 +218,11 @@ class Event(db.Model):
     # Have to make local to utc
     to_zone = tz.tzutc()
     from_zone = tz.tzlocal()
-    utc = alarm
+    utc = self.time
     utc = utc.replace(tzinfo=from_zone)
     alarm = utc.astimezone(to_zone)
     # Notify 30 min before event
-    alarm = self.time - timedelta(minutes=30)
+    alarm = alarm - timedelta(minutes=30)
     event_notify.apply_async( (u.username, alarm), eta=alarm )
     db.session.add(self)
     db.session.commit()
@@ -253,7 +258,7 @@ class Event(db.Model):
 class Location(db.Model):
   __tablename__ = 'location'
   id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(128))
+  name = db.Column(db.String(128), index=True)
   url = db.Column(db.String(128))
   # Store the users and events that belong to this location
   users = db.relationship('User', backref='location', lazy='dynamic')

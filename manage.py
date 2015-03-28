@@ -14,7 +14,7 @@ if os.path.exists('.env'):
             os.environ[var[0]] = var[1]
 
 from app import create_app, db
-from app.models import User, Location, Role
+from app.models import User, Location, Role, Event
 from flask.ext.script import Manager, Shell
 from flask.ext.migrate import Migrate, MigrateCommand
 
@@ -79,6 +79,14 @@ def make_admin(username):
   u.role_id = 1
   print(u.username,'was made admin')
   db.session.commit()
+
+@manager.command
+def make_fakes():
+  # Users at RIT
+  if input('make fake users?').lower() == 'y':
+    User.generate_fake(20, 8197)
+  if input('make fake events?').lower() == 'y':
+    Event.generate_fake(250, 8197)
   
 
 @manager.command
