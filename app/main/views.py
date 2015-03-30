@@ -1,4 +1,5 @@
-import datetime
+from datetime import datetime, timedelta
+from dateutil import tz
 from dateutil.parser import parse
 from flask import render_template, session, redirect, url_for, current_app,\
   flash, jsonify, request
@@ -9,6 +10,7 @@ from .. import db
 from ..models import User, Event, Location
 from autocomplete.views import autocomplete_view
 from sqlalchemy import func
+from ..tasks import event_notify
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -77,16 +79,26 @@ def make_event():
     d = form.date.data
     t = form.time.data
     # Combine date and time
-    t = datetime.datetime(datetime.datetime.now().year, d.month, d.day, t.hour, t.minute)
-    print(t)
+    t = datetime(datetime.now().year, d.month, d.day, t.hour, t.minute)
     event = Event(name=form.name.data, serving=form.serving.data,\
       time=t, body=form.body.data,\
       place=form.place.data,
       author=current_user._get_current_object(),
       location=current_user.location)
+
+    # Create a notification event
+    # Have to make local to utc
+    to_zone = tz.tzutc()
+    from_zone = tz.tzlocal()
+    utc = t.replace(tzinfo=from_zone)
+    alarm = utc.astimezone(to_zone)
+    # Notify 30 min before event
+    alarm = alarm - timedelta(minutes=30)
+    #event_notify.apply_async( ( self ), eta=alarm )
+    event_notify.apply_async( ( 'hi', ), delay=30 )
+
     db.session.add(event)
     db.session.commit()
-    # Start the mail timer
     return redirect(url_for('main.index'))
   return render_template('make-event.html', form=form)
 
