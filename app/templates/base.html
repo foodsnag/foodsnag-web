@@ -6,7 +6,7 @@
   <script type="text/javascript" src="{{ url_for('static', filename='mjs/materialize.min.js')}}"></script>
 
   <title>
-    {% block title %}freets.me{% endblock %}
+    {% block title %}{{config['APP_NAME']}}{% endblock %}
   </title>
 
   {% block head %}
