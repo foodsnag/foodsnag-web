@@ -1,7 +1,13 @@
 /* Nav bar */
 
-.brand-logo {
-  margin: 10px 0;
+
+svg #logo{
+  fill: white;
+}
+
+nav svg#logo {
+  padding: 8px;
+  margin: 0;
 }
 
 /* Parallax / header */
