@@ -18,6 +18,7 @@
 ## Wish list ( Not priority )
 
 - [ ] Event categories (talk, club meeting, performance, etc)
+- [ ] Remove events
 - [ ] Point system
 - [ ] Avatars
 
