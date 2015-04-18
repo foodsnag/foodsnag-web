@@ -98,7 +98,7 @@ def upcoming_notify():
   events = Event.query.filter( Event.time > now ).filter(Event.time < next_30).all()
   for event in events:
     for user in event.attendees:
-      mailer.notify_soon(user, event)
+      mailer.reminder(user, event)
   
   
 
