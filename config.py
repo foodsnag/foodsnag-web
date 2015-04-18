@@ -6,7 +6,7 @@ class Config:
     MAILER_NAME = 'Snagger'
     MAILER_EMAIL = 'snagger@foodsnag.com'
     MG_KEY = os.environ.get('MG_KEY')
-    MG_URL = 'https://api.mailgun.net/v3/sandbox86fa708b0be84193924a6900094a11cf.mailgun.org'
+    MG_URL = "https://api.mailgun.net/v3/sandbox86fa708b0be84193924a6900094a11cf.mailgun.org/messages"
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'G00DB33F'
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
@@ -18,7 +18,7 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
-    TESTING = True
+    TESTING = False
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
 
