@@ -7,21 +7,22 @@ Worker can be run as follows:
   celery -A tasks worker --loglevel=info --beat 
 
 """
-from celery import Celery
+from .extensions import celery, db
 from celery.task import periodic_task
 from datetime import timedelta
+from .models import User, Event
 
-app = Celery('tasks', backend='amqp', broker='amqp://')
-
-app.conf.CELERY_TIMEZONE = 'America/New_York'
-
-
-@periodic_task(run_every=timedelta(hours=10))
+@periodic_task(run_every=timedelta(hours=24))
 def daily_notify():
   """ Runs every day to notify users of daily events """
   print("Running the daily task!!!")
 
-@app.task(name='tasks.event_notify')
+@periodic_task(run_every=timedelta(seconds=10))
+def upcoming_notify():
+  print('hi')
+  print( User.query.get().limit(10) )
+
+@celery.task(name='tasks.event_notify')
 def event_notify( name, time ):
   """ Notifies a user of an upcoming event """
   print("REMEMBER to go to that event,",name,"!! It's at",time)
