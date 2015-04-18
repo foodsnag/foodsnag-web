@@ -1,0 +1,6 @@
+Hey {{ user.username }}!!
+
+Don't forget! There's going to be food at {{ event.time.strftime('%l:%M%p')}} at {{ event.place }}.
+
+Happy snagging!
+- The FoodSnag Team

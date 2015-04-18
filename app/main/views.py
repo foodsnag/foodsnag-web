@@ -5,7 +5,7 @@ from flask import render_template, session, redirect, url_for, current_app,\
 from flask.ext.login import login_user, login_required, current_user
 from . import main
 from .forms import EditProfileForm, SchoolSearchForm, MakeEventForm
-from .. import db
+from ..extensions import db
 from ..models import User, Event, Location
 from autocomplete.views import autocomplete_view
 from sqlalchemy import func
@@ -25,7 +25,6 @@ def index():
       if hasattr(schoolSearch.location.data, 'id'):
         return redirect(url_for('main.location', id=schoolSearch.location.data.id))
     return render_template('index.html', schoolSearchForm=schoolSearch)
-
 
 
 ## User stuff

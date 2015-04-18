@@ -1,42 +1,32 @@
 import sched, time, datetime
 from flask import Flask, abort, redirect, url_for
 from flask.ext.bootstrap import Bootstrap
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager, current_user
+from .extensions import db, celery, login_manager
 from flask.ext.admin import Admin, BaseView, expose, AdminIndexView
 from flask.ext.admin.contrib.sqla import ModelView
 from wtforms.fields import SelectField, PasswordField
 from config import config
+from celery.task import periodic_task
+from datetime import timedelta
+from .models import Permission, User, Event, Location
+from .tasks import upcoming_notify
 
 bootstrap = Bootstrap()
-db = SQLAlchemy()
-
-login_manager = LoginManager()
-login_manager.session_protection = 'strong'
-login_manager.login_view = 'auth.login'
-
-# Flask-Admin Views
-
-class HomeView(AdminIndexView):
-    @expose('/')
-    def index(self):
-        print(current_user.is_authenticated())
-        if not current_user.is_authenticated():
-            return redirect(url_for('auth.login'))
-        return super(HomeView, self).index()
-
-admin = Admin(index_view=HomeView())
 
 def create_app(config_name):
   app = Flask(__name__)
   app.config.from_object(config[config_name])
   config[config_name].init_app(app)
-
+  
   admin.init_app(app)
 
   bootstrap.init_app(app)
   db.init_app(app)
+  celery.init_app(app)
+  celery.conf.CELERY_TIMEZONE = 'America/New_York'
 
+  login_manager.session_protection = 'strong'
+  login_manager.login_view = 'auth.login'
   login_manager.init_app(app)
 
   from .main import main as main_blueprint
@@ -50,11 +40,20 @@ def create_app(config_name):
 
   return app
 
+# Flask-Admin Views
 
+class HomeView(AdminIndexView):
+    @expose('/')
+    def index(self):
+        print(current_user.is_authenticated())
+        if not current_user.is_authenticated():
+            return redirect(url_for('auth.login'))
+        return super(HomeView, self).index()
+
+admin = Admin(index_view=HomeView())
 
 
 # Setup More Admin view stuff
-from .models import Permission, User, Event, Location
 
 class UserView(ModelView):
     column_list = ('username', 'email', 'member_since', 'role', 'location')
