@@ -31,7 +31,7 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    MG_URL = 'https://api.mailgun.net/v3/mg.foodsnag.com'
+    MG_URL = 'https://api.mailgun.net/v3/mg.foodsnag.com/messages'
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 
