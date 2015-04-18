@@ -1,0 +1,6 @@
+Hey {{ user.username }} and welcome to FoodSnag!
+
+Check out where you can snag some food around campus:
+{{ url_for('location', id=user.location_id, _external=True) }}
+
+The FoodSnag Team

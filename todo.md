@@ -1,7 +1,7 @@
 
 ## Important stuff
 
-- [ ] New name
+- [x] New name ( Bought pizzaswipe.com and foodsnag.com )
 - [ ] Scheduled events/cron jobs for notifications
 - [ ] E-mail notifications
 - [ ] Text notifications
@@ -18,6 +18,7 @@
 ## Wish list ( Not priority )
 
 - [ ] Event categories (talk, club meeting, performance, etc)
+- [ ] Remove events
 - [ ] Point system
 - [ ] Avatars
 

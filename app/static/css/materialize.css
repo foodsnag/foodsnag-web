@@ -7889,8 +7889,12 @@ ul.side-nav.fixed .collapsible-body li.active {
   border-left: 0.75em solid #676767; }
 
 /* Nav bar */
-.brand-logo {
-  margin: 10px 0; }
+svg #logo {
+  fill: white; }
+
+nav svg#logo {
+  padding: 8px;
+  margin: 0; }
 
 /* Parallax / header */
 #home-banner {

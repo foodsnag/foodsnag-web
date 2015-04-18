@@ -1,7 +1,7 @@
 from flask import render_template, redirect, request, url_for, flash, jsonify
 from flask.ext.login import login_user, logout_user, login_required, current_user
 from . import auth
-from .. import db
+from ..extensions import db
 from ..models import User, Location
 from .forms import LoginForm, RegistrationForm
 from autocomplete.views import autocomplete_view

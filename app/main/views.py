@@ -6,7 +6,7 @@ from flask import render_template, session, redirect, url_for, current_app,\
 from flask.ext.login import login_user, login_required, current_user
 from . import main
 from .forms import EditProfileForm, SchoolSearchForm, MakeEventForm
-from .. import db
+from ..extensions import db
 from ..models import User, Event, Location
 from autocomplete.views import autocomplete_view
 from sqlalchemy import func
@@ -29,7 +29,6 @@ def index():
     return render_template('index.html', schoolSearchForm=schoolSearch)
 
 
-
 ## User stuff
 
 ## User profile
@@ -43,8 +42,11 @@ def user(username):
 @login_required
 def edit_profile():
   form = EditProfileForm()
+  form.location.data = current_user.location
+  form.email_notifications.data = current_user.email_notifications
   if form.validate_on_submit():
-    current_user.location = form.location.data
+    if form.location.data != '':
+      current_user.location = form.location.data
     current_user.email_notifications = form.email_notifications.data
     db.session.add(current_user)
     flash('Your profile has been updated.')
