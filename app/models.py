@@ -4,8 +4,8 @@ import hashlib
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask import current_app, request, url_for
 from flask.ext.login import UserMixin, AnonymousUserMixin
-from . import db, login_manager
-from .tasks import event_notify
+from .extensions import db, login_manager
+#from .tasks import event_notify
 
 class Permission:
   ADMINISTER = 0x80
@@ -39,7 +39,6 @@ attendees = db.Table('attendees',
   db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
   db.Column('event_id', db.Integer, db.ForeignKey('event.id'))
 )
-
 
 
 class User(UserMixin, db.Model):
@@ -221,9 +220,12 @@ class Event(db.Model):
     utc = self.time
     utc = utc.replace(tzinfo=from_zone)
     alarm = utc.astimezone(to_zone)
+
     # Notify 30 min before event
+
     alarm = alarm - timedelta(minutes=30)
-    event_notify.apply_async( (u.username, alarm), eta=alarm )
+    #event_notify.apply_async( (u.username, alarm), eta=alarm )
+
     db.session.add(self)
     db.session.commit()
 

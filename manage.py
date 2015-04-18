@@ -84,9 +84,22 @@ def make_admin(username):
 def make_fakes():
   # Users at RIT
   if input('make fake users?').lower() == 'y':
-    User.generate_fake(20, 8197)
+    User.generate_fake(20, 8196)
   if input('make fake events?').lower() == 'y':
-    Event.generate_fake(250, 8197)
+    Event.generate_fake(250, 8196)
+
+@manager.command
+def upcoming_notify():
+  import datetime
+  from app import mailer
+  
+  next_30 = datetime.datetime.utcnow() + datetime.timedelta(minutes=300)
+  now = datetime.datetime.utcnow()
+  events = Event.query.filter( Event.time > now ).filter(Event.time < next_30).all()
+  for event in events:
+    for user in event.attendees:
+      mailer.notify_soon(user, event)
+  
   
 
 @manager.command
