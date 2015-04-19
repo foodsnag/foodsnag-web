@@ -31,29 +31,40 @@ def index():
 
 ## User stuff
 
-## User profile
 @main.route('/user/<username>')
 def user(username):
+  """
+  User profile
+  """
   user = User.query.filter_by(username=username).first_or_404()
   return render_template('user.html', user=user, events=user.submitted)
 
-## Edit profile page
 @main.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
-  form = EditProfileForm()
-  form.location.data = current_user.location
-  form.email_notifications.data = current_user.email_notifications
+  """
+  Edit profile
+  """
+  form = EditProfileForm(email=current_user.email,
+                        email_notifications=current_user.email_notifications,
+                        location=current_user.location)
+
   if form.validate_on_submit():
     if form.location.data != '':
       current_user.location = form.location.data
+    current_user.email = form.email.data
     current_user.email_notifications = form.email_notifications.data
     db.session.add(current_user)
+    db.session.commit()
     flash('Your profile has been updated.')
     return redirect(url_for('.user', username=current_user.username))
   return render_template('edit_profile.html', form=form)
 
 def find_loc(query):
+  """
+  Find location using a search query.
+  Used for auto complete
+  """
   results = Location.query.filter(Location.name.like('%'+str(query)+'%')).limit(5)
   locs = []
   for loc in results:
@@ -66,9 +77,11 @@ def autocomplete():
 
 ### Event stuff
 
-## Event page
 @main.route('/event/<int:id>', methods=['GET', 'POST'])
 def event(id):
+  """
+  Event page
+  """
   event = Event.query.get_or_404(id)
   return render_template('event.html', event=event)
 
@@ -76,6 +89,9 @@ def event(id):
 @main.route('/make-event', methods=['GET', 'POST'])
 @login_required
 def make_event():
+  """
+  Make a new event page
+  """
   form = MakeEventForm()
   if form.validate_on_submit():
     d = form.date.data
@@ -105,22 +121,29 @@ def make_event():
   return render_template('make-event.html', form=form)
 
 
-## Locations list page
 @main.route('/locations')
 def locations():
+  """
+  Displays page of locations (currently not used)
+  """
   locations = Location.query.order_by(Location.name.asc())
   return render_template('locations.html', locations=locations)
 
-## Location page
 @main.route('/location/<id>')
 def location(id):
+  """
+  Location page
+  Shows events happening at a given location
+  """
   location = Location.query.get_or_404(id)
   events = Event.future_events(location.id)
   return render_template('location.html', location=location, events=events)
 
-# Attend Event
 @main.route('/attend/<id>')
 def attend(id):
+  """
+  Attend event
+  """
   event = Event.query.get_or_404(id)
   if current_user.is_attending(id):
     flash('You are already attending %s!'% event.name)
@@ -129,9 +152,11 @@ def attend(id):
   flash('You are now attending %s!'% event.name)
   return redirect(url_for('.event', id=event.id))
 
-# Unattend Event
 @main.route('/unattend/<id>')
 def unattend(id):
+  """
+  Unattend event (remove from going list)
+  """
   event = Event.query.get_or_404(id)
   if not current_user.is_attending(id):
     flash('You aren\'t attending %s!'% event.name)

@@ -13,6 +13,7 @@
   <form method=post>
     <dl>
       {{ render_field(form.location) }}
+      {{ render_field(form.email) }}
       {{ render_field(form.email_notifications) }}
       {{ form.hidden_tag() }}
       <p>

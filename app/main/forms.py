@@ -5,6 +5,7 @@ from wtforms import StringField, TextAreaField, BooleanField, SelectField,\
   DateTimeField, SubmitField
 from wtforms.validators import Required, Length, Email
 from wtforms import ValidationError
+from flask.ext.login import current_user
 from ..models import User, Event, Location
 from autocomplete.forms import AutocompleteField
 
@@ -13,6 +14,7 @@ def get_loc_by_id(id):
   return loc
 
 class EditProfileForm(Form):
+  email = StringField('Email', validators=[Required(), Length(1, 64), Email()])
   location = AutocompleteField(
         label='Search for your school',
         url='main.autocomplete',

@@ -5498,12 +5498,12 @@ small {
   -moz-border-radius: 2px;
   border-radius: 2px;
   background-clip: padding-box;
-  background-color: #fff; }
+  background-color: #f67635; }
 
 .card {
   position: relative;
   margin: 0.5rem 0 1rem 0;
-  background-color: #fff;
+  background-color: #f67635;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -5586,12 +5586,13 @@ small {
     box-sizing: border-box; }
     .card .card-content p {
       margin: 0;
-      color: inherit; }
+      color: #fff; }
     .card .card-content .card-title {
       line-height: 48px; }
   .card .card-action {
     border-top: 1px solid rgba(160, 160, 160, 0.2);
-    padding: 20px; }
+    padding: 20px;
+    color: #fff; }
   .card .card-reveal {
     padding: 20px;
     position: absolute;
