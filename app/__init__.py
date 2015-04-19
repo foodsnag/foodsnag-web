@@ -1,6 +1,5 @@
 import sched, time, datetime
 from flask import Flask, abort, redirect, url_for
-from flask.ext.bootstrap import Bootstrap
 from .extensions import db, celery, login_manager
 from flask.ext.admin import Admin, BaseView, expose, AdminIndexView
 from flask.ext.admin.contrib.sqla import ModelView
@@ -11,7 +10,6 @@ from datetime import timedelta
 from .models import Permission, User, Event, Location
 from .tasks import upcoming_notify
 
-bootstrap = Bootstrap()
 
 def create_app(config_name):
   app = Flask(__name__)
@@ -20,7 +18,6 @@ def create_app(config_name):
   
   admin.init_app(app)
 
-  bootstrap.init_app(app)
   db.init_app(app)
   celery.init_app(app)
   celery.conf.CELERY_TIMEZONE = 'America/New_York'
