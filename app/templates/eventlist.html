@@ -1,48 +1,46 @@
-<ul class="collapsible" data-collapsible="accordion">
 {% for event in events %}
+    {% if (loop.index - 1) is divisibleby 2 %}
+        <div class="row">
+    {% endif %}
+        <div class="col s12 m6 l6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        {{event.name}} - {{ event.serving }}
+                    </span>
+                        <p><b>{{ event.time.strftime('%-I:%M%p %A, %B %-d') }}</b></p>
+                        <p>Location: {{ event.place }}</p>
+                        <p>Additional information: {{ event.body }}</p>.
+                </div>
+                <div class="card-action align-left">
+                    <span class="left-button">
+                      <a href="{{ url_for('main.attend', id=event.id) }}">Count me in</a>
+                    </span>
+                    <span class="right-people">
+                        {{ event.num_attendees() }}
+                        <i class="mdi-social-person"></i>
+                    </span>
 
-  <li>
-    <div class="collapsible-header">
-    <i class="mdi-maps-local-restaurant circle"></i>
-    <span class="title">{{event.name}}</span>
-    <span class="secondary-content badge">
-    {{ event.time.strftime('%H:%M - %B %d, %Y') }}
-    </span>
-    </div>
-    <div class="collapsible-body">
-      <div class="row">
-        <div class="col s4 offset-s1">
-          At {{ event.place }}<br>
-          Serving: {{ event.serving }}
+                </div>
+            </div>
         </div>
-        <div class="col s6 right-align"> 
-          {% if event.num_attendees() > 0 %}
-            {{ event.num_attendees() }} attending
-          {% else %}
-            No one attending yet
-          {% endif %}
-          <a class="btn-floating" href="{{ url_for('main.attend', id=event.id) }}"><i class="mdi-content-add"></i></a>
+
+    {% if loop.index is divisibleby 2  %}
         </div>
-      </div>
-    </div>
-  </a>
-  </li>
-
-
-    {% if not current_user.is_authenticated() %}
-      <a class="btn-floating" href="{{ url_for('auth.register') }}">
-        Sign Up!
-      </a>
-      <a class="btn-floating" href="{{ url_for('auth.login') }}">
-        Login
-      </a>
-      {% if event.num_attendees() > 0 %}
-        {{ event.num_attendees() }} attending
-      {% else %}
-        No one attending yet
-      {% endif %}
     {% endif %}
 
-{% endfor %}
-</ul>
+        {% if not current_user.is_authenticated() %}
+            <a class="btn-floating" href="{{ url_for('auth.register') }}">
+                Sign Up!
+            </a>
+            <a class="btn-floating" href="{{ url_for('auth.login') }}">
+                Login
+            </a>
+            {% if event.num_attendees() > 0 %}
+                {{ event.num_attendees() }} attending
+            {% else %}
+                No one attending yet
+            {% endif %}
+        {% endif %}
 
+{% endfor %}
