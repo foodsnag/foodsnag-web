@@ -1,6 +1,5 @@
 /* Nav bar */
 
-
 svg #logo{
   fill: white;
 }
@@ -10,10 +9,25 @@ nav svg#logo {
   margin: 0;
 }
 
+.container h1 {
+  color: #FFF;
+}
+
+
+.input#search-location {
+  border-bottom: 1px solid #FFF;
+  border-shadow: 0px 1px 0px 0px #FFF;
+}
+
+ul.autocomplete li.active {
+  background-color: #DDD;
+}
+
 /* Parallax / header */
 
 #home-banner {
   display: block;
+  color: #FFF;
 }
 
 .parallax-container {

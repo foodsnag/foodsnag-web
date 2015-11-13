@@ -4,6 +4,7 @@
 
   <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}"></script>
   <script type="text/javascript" src="{{ url_for('static', filename='mjs/materialize.min.js')}}"></script>
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 
   <title>
     {% block title %}{{config['APP_NAME']}}{% endblock %}
@@ -194,7 +195,7 @@
 
   <div class="section freets-yellow">
     <div class="container">
-      <div class="section white">
+      <div class="section freets-teal">
         <div class="container">
           {% block page_content %}
           {% endblock %}

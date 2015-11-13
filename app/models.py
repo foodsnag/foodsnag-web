@@ -171,12 +171,18 @@ class Event(db.Model):
     import random
     import forgery_py
 
+    rand_name = ["Party!", "Study Session", "Gosnell Open House", "Student Gov Event"]
+    rand_locs = ["GOS 3365", "CAR 1250", "BRN 352", "ORN 107", "GOL 3200", "EAS 1243", "Library Lobby", "Infinity Quad", "Field House"]
+    rand_serv = ["Pizza", "Pizza", "Pizza and snacks", "Snacks", "BBQ", "Hamburgers and Hotdogs"]
     seed()
     for i in range(count):
       e = Event()
-      e.name=forgery_py.lorem_ipsum.word()
-      e.serving=forgery_py.lorem_ipsum.word()
-      e.place=forgery_py.lorem_ipsum.word()
+      #e.name=forgery_py.lorem_ipsum.word()
+      #e.serving=forgery_py.lorem_ipsum.word()
+      #e.place=forgery_py.lorem_ipsum.word()
+      e.name = rand_name[random.randint(0,len(rand_name)-1)]
+      e.serving = rand_serv[random.randint(0,len(rand_serv)-1)]
+      e.place = rand_locs[random.randint(0,len(rand_locs)-1)]
       e.time= datetime.combine(forgery_py.date.date(past=False), time(hour=random.randrange(0,23),minute=random.randrange(0,59)))
       e.body=forgery_py.lorem_ipsum.sentence()
       e.author_id=User.query.get(random.randrange(1, User.query.count())).id

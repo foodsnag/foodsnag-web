@@ -84,9 +84,9 @@ def make_admin(username):
 def make_fakes():
   # Users at RIT
   if input('make fake users?').lower() == 'y':
-    User.generate_fake(20, 8196)
+    User.generate_fake(20, 8197)
   if input('make fake events?').lower() == 'y':
-    Event.generate_fake(250, 8196)
+    Event.generate_fake(250, 8197)
 
 @manager.command
 def upcoming_notify():
@@ -105,6 +105,7 @@ def upcoming_notify():
 @manager.command
 def importschools(fpath):
     """Import CSV file with all schools into database"""
+
     n = 0
     with open(fpath) as f:
         reader = csv.reader(f)
